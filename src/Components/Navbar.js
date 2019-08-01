@@ -39,7 +39,7 @@ function Navbar() {
               <Text size={400}> User name </Text>
             </Pane>
             :
-            <Button appearance="primary">Login</Button>
+            <Button is={Link} to="/login" appearance="primary">Login</Button>
           }
 
 
