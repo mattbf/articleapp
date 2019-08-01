@@ -1,6 +1,6 @@
 import React from 'react';
 import './Styles/App.css';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from "react-router-dom";
 import Navbar from './Components/Navbar'
 import Home from './Components/Home'
 import Test from './Components/Test'
@@ -23,13 +23,34 @@ const centerBlockBlank = {
   maxWidth: '1080px',
 }
 
+const fakeAuth = true
+function PrivateRoute({ component: Component, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        fakeAuth ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+
 function App() {
   return (
     <Router>
       <div style={centerBlock}>
         <Route path="/" component={Home} exact/>
         <Route path="/testing" component={Test}/>
-        <Route path="/article/:title" component={Article}/>
+        <PrivateRoute path="/article/:title" component={Article}/>
       </div>
       <div style={centerBlockBlank}>
         <Route path="/login" component={Login} />

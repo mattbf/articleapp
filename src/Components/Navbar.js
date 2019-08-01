@@ -73,7 +73,7 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  const auth = true
+  const auth = false
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
