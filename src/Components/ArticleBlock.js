@@ -5,25 +5,32 @@ import {Link} from 'react-router-dom'
 // position: 'absolute',
 // left: '5px',
 // top: '3px',
-
+const articleLink = {
+  textDecoration: 'none',
+  '&:hover': {
+    textDecoration: 'underline',
+    color: '#1070CA'
+  }
+}
 
 function ArticleBlock(props) {
   var url = props.article.title.split(' ').join('-')
   return(
-    <Link
-      to={{
-        pathname: `/article/${url}`,
-        state: {props},
-      }}
-      style={{textDecoration: 'none'}}
-    >
       <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
         <Pane flex={1} alignItems="top" display="flex">
           <Pane>
             <Pane flex={1} alignItems="top" display="flex" flexDirection='row'>
               <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.index}</Pill>
             <Pane flex={1} alignItems="center" display="flex" flexDirection='column'>
-              <Heading size={600} >{props.article.title}</Heading>
+              <Link
+                to={{
+                  pathname: `/article/${url}`,
+                  state: {props},
+                }}
+                style={articleLink}
+              >
+                <Heading style={articleLink} size={600} >{props.article.title}</Heading>
+              </Link>
               <Pane flex={1} alignItems="center" display="flex">
                 <Text size={300} marginRight={3}>Posted by </Text>
                 <Link to='/testing' style={{marginTop: '-4px'}}>
@@ -41,7 +48,6 @@ function ArticleBlock(props) {
           {/* Below you can see the marginRight property on a Button. */}
         </Pane>
       </Pane>
-    </Link>
   )
 }
 
