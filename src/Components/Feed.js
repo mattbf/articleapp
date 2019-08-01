@@ -6,13 +6,13 @@ const data = [
     title: "article title - could be long",
     author: 'Landon',
     createdAt: '3 hours ago',
-    commentsCount: '2 comments'
+    commentsCount: '2'
   },
   {
     title: "article title - could be long",
     author: 'Landon',
     createdAt: '3 hours ago',
-    commentsCount: '2 comments'
+    commentsCount: '2'
   }
 ]
 
