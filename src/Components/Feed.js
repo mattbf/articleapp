@@ -13,7 +13,98 @@ const data = [
     author: 'Landon',
     createdAt: '3 hours ago',
     commentsCount: '2'
-  }
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  {
+    title: "article title - could be long",
+    author: 'Landon',
+    createdAt: '3 hours ago',
+    commentsCount: '2'
+  },
+  
 ]
 
 function Feed() {
