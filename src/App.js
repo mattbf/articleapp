@@ -18,12 +18,6 @@ function App() {
       <div style={centerBlock}>
         <Navbar/>
         <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-
           <hr />
 
           <Route exact path="/" component={Home} />
