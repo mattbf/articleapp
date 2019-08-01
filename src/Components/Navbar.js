@@ -1,10 +1,17 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
+const logoBlock = {
+  display: 'flex',
+  flexDirection: 'row',
+}
+
+//className="logoBlock"
+
 function Navbar() {
   return (
-    <div>
-      <div className="logoBlock">
+    <div style={logoBlock}>
+      <div style={logoBlock}>
         <img src='' />
         <Link to='/'>
           <div className="navHeading">
