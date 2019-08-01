@@ -1,5 +1,6 @@
 import React from 'react'
 import Feed from './Feed'
+import Navbar from './Navbar'
 import { Link } from "react-router-dom";
 import {
   Pane,
@@ -12,6 +13,7 @@ function Home() {
   const auth = false
   return(
     <div>
+      <Navbar/>
       <h1>Home</h1>
       { auth ?
         <Feed/>
