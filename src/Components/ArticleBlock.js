@@ -4,7 +4,13 @@ import {Link} from 'react-router-dom'
 
 function ArticleBlock(props) {
   return(
-    <Link to={`/article/${props.article.title}`} style={{textDecoration: 'none'}}>
+    <Link
+      to={{
+        pathname: `/article/${props.article.title}`,
+        state: {props},
+      }}
+      style={{textDecoration: 'none'}}
+    >
       <Pane display="flex" padding={16} background="tint2" borderRadius={3} margin={10} position='relative'>
         <Heading size={100} marginRight={10} position='absolute' left={5} top={3}>{props.index}</Heading>
         <Pane flex={1} alignItems="top" display="flex">
