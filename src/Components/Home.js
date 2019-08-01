@@ -19,7 +19,7 @@ function Home() {
         <Feed/>
         :
         <Pane flex={1} alignItems="center" display="flex">
-          <Link to='/login' style={{marginTop: '-4px'}}>
+          <Link to='/login' style={{marginTop: '-2px'}}>
             <Text size={500} marginRight={3}>Login</Text>
           </Link>
           <Text size={500}>to view articles</Text>

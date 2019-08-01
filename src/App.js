@@ -1,6 +1,7 @@
 import React from 'react';
 import './Styles/App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Navbar from './Components/Navbar'
 import Home from './Components/Home'
 import Test from './Components/Test'
 import Login from './Components/Login'
@@ -17,13 +18,10 @@ function App() {
   return (
     <Router>
       <div style={centerBlock}>
-
-        <div>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/test" component={Test} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={Signup} />
-        </div>
+        <Route path="/" component={Home} exact/>
+        <Route path="/testing" component={Test}/>
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup}/>
       </div>
     </Router>
   );
