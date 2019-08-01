@@ -50,6 +50,7 @@ function App() {
       <div style={centerBlock}>
         <Route path="/" component={Home} exact/>
         <Route path="/testing" component={Test}/>
+        <Route path="/author/:username" component={Test}/>
         <PrivateRoute path="/article/:title" component={Article}/>
       </div>
       <div style={centerBlockBlank}>

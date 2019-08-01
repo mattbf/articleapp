@@ -30,16 +30,15 @@ function Article(props) {
             <Heading size={200} marginRight={5}> {article.commentsCount} comments</Heading>
           </Link>
         </Pane>
-        <Heading size={700} marginBottom={20} textAlign='center' >{article.title} blah kljsdfkldsjlfjkdsl dkl;jdsfklajk jehjsjk maybe it will get extended though.. have to prepare for this</Heading>
+        <Heading size={800} marginBottom={20} textAlign='center' >{article.title}</Heading>
       </Pane>
       <Pane padding={15} background='#F7F9FD'>
-        <Heading size={500} marginBottom={20} >Body</Heading>
         <Pane background="#FFFFFF" padding={24} marginBottom={16}>
           <Text>{article.body}</Text>
         </Pane>
       </Pane>
-      <Pane padding={15} background="#F7F9FD" >
-        <Heading size={500} marginBottom={20} >Comments</Heading>
+      <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
+        <Heading size={700} marginBottom={20} >Comments</Heading>
       </Pane>
     </div>
   )

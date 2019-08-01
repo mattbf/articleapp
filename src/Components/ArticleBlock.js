@@ -1,18 +1,11 @@
 import React from 'react'
-import { Pane, Button, Text, Heading, Icon, } from 'evergreen-ui'
+import { Pane, Button, Text, Heading, Icon, Pill } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
 
 // position: 'absolute',
 // left: '5px',
 // top: '3px',
 
-const index = {
-  display: 'flex',
-  flexDirection: "column",
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginRight: '8px',
-}
 
 function ArticleBlock(props) {
   var url = props.article.title.split(' ').join('-')
@@ -28,20 +21,20 @@ function ArticleBlock(props) {
         <Pane flex={1} alignItems="top" display="flex">
           <Pane>
             <Pane flex={1} alignItems="top" display="flex" flexDirection='row'>
-              <div style={index}>
-                <Icon icon="full-circle" size={16} color="#DDEBF7" />
-                <Heading size={100} marginLeft={0}  position='absolute'>{props.index}</Heading>
-              </div>
-            <Heading size={600} >{props.article.title}</Heading>
+              <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.index}</Pill>
+            <Pane flex={1} alignItems="center" display="flex" flexDirection='column'>
+              <Heading size={600} >{props.article.title}</Heading>
+              <Pane flex={1} alignItems="center" display="flex">
+                <Text size={300} marginRight={3}>Posted by </Text>
+                <Link to='/testing' style={{marginTop: '-4px'}}>
+                  <Text size={300} marginRight={3}>{props.article.author}</Text>
+                </Link>
+                <Text size={300} marginRight={3}> | </Text>
+                <Text size={300}> {props.article.createdAt} | {props.article.commentsCount} comments</Text>
+              </Pane>
             </Pane>
-            <Pane flex={1} alignItems="center" display="flex" paddingLeft='24px'>
-              <Text size={300} marginRight={3}>Posted by </Text>
-              <Link to='/testing' style={{marginTop: '-4px'}}>
-                <Text size={300} marginRight={3}>{props.article.author}</Text>
-              </Link>
-              <Text size={300} marginRight={3}> | </Text>
-              <Text size={300}> {props.article.createdAt} | {props.article.commentsCount} comments</Text>
             </Pane>
+
           </Pane>
         </Pane>
         <Pane>
