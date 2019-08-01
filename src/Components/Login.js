@@ -24,12 +24,14 @@ function Login() {
         <Heading size={500} marginBottom={20} >Sing in to your account</Heading>
         <TextInput
           name="text-input-name"
+          type="text"
           placeholder="username"
           marginBottom="15px"
           width="100%"
         />
         <TextInput
-          name="text-input-name"
+          name="text-input-password"
+          type="password"
           placeholder="password"
           marginBottom="15px"
           width="100%"
