@@ -20,6 +20,15 @@ function Article(props) {
     <div style={center}>
       <Navbar/>
       <Pane padding={15} background="tint1" >
+        <Pane display="flex" alignItems="center" marginBottom={10}>
+          <Link to={`/author/${article.author}`}>
+            <Heading size={200} marginRight={5}>{article.author} |</Heading>
+          </Link>
+          <Heading size={200} marginRight={5}>{article.createdAt} |</Heading>
+          <Link>
+            <Heading size={200} marginRight={5}> {article.commentsCount} comments</Heading>
+          </Link>
+        </Pane>
         <Heading size={500} marginBottom={20} >Article info {article.title} {article.author}</Heading>
       </Pane>
       <Pane padding={15} >
