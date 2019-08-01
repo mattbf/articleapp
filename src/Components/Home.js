@@ -10,7 +10,7 @@ import {
 } from 'evergreen-ui'
 
 function Home() {
-  const auth = false
+  const auth = true
   return(
     <div>
       <Navbar/>

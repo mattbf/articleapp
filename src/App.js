@@ -6,6 +6,7 @@ import Home from './Components/Home'
 import Test from './Components/Test'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
+import Article from './Components/Article'
 
 const centerBlock = {
   marginLeft: 'auto',
@@ -22,6 +23,7 @@ function App() {
         <Route path="/testing" component={Test}/>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup}/>
+        <Route path="/article/:title" component={Article}/>
       </div>
     </Router>
   );
