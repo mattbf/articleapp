@@ -35,10 +35,12 @@ function ArticleBlock(props) {
             <Heading size={600} >{props.article.title}</Heading>
             </Pane>
             <Pane flex={1} alignItems="center" display="flex" paddingLeft='24px'>
+              <Text size={300} marginRight={3}>Posted by </Text>
               <Link to='/testing' style={{marginTop: '-4px'}}>
                 <Text size={300} marginRight={3}>{props.article.author}</Text>
               </Link>
-              <Text size={300}>posted {props.article.createdAt} | {props.article.commentsCount} comments</Text>
+              <Text size={300} marginRight={3}> | </Text>
+              <Text size={300}> {props.article.createdAt} | {props.article.commentsCount} comments</Text>
             </Pane>
           </Pane>
         </Pane>
