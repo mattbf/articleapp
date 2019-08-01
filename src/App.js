@@ -13,6 +13,14 @@ const centerBlock = {
   marginRight: 'auto',
   width: '100%',
   maxWidth: '1080px',
+  backgroundColor: '#F7F9FD',
+}
+
+const centerBlockBlank = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '100%',
+  maxWidth: '1080px',
 }
 
 function App() {
@@ -21,9 +29,11 @@ function App() {
       <div style={centerBlock}>
         <Route path="/" component={Home} exact/>
         <Route path="/testing" component={Test}/>
+        <Route path="/article/:title" component={Article}/>
+      </div>
+      <div style={centerBlockBlank}>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup}/>
-        <Route path="/article/:title" component={Article}/>
       </div>
     </Router>
   );

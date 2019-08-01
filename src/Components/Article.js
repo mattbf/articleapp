@@ -21,6 +21,7 @@ function Article(props) {
       <Navbar/>
       <Pane padding={15} background="tint1" >
         <Pane display="flex" alignItems="center" marginBottom={10}>
+          <Heading size={200} marginRight={5}>Posted by </Heading>
           <Link to={`/author/${article.author}`}>
             <Heading size={200} marginRight={5}>{article.author} |</Heading>
           </Link>

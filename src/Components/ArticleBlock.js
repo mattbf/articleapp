@@ -15,15 +15,16 @@ const index = {
 }
 
 function ArticleBlock(props) {
+  var url = props.article.title.split(' ').join('-')
   return(
     <Link
       to={{
-        pathname: `/article/${props.article.title}`,
+        pathname: `/article/${url}`,
         state: {props},
       }}
       style={{textDecoration: 'none'}}
     >
-      <Pane display="flex" padding={16} background="tint2" borderRadius={3} margin={10} position='relative'>
+      <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
         <Pane flex={1} alignItems="top" display="flex">
           <Pane>
             <Pane flex={1} alignItems="top" display="flex" flexDirection='row'>

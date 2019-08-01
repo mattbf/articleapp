@@ -14,10 +14,13 @@ const logoBlock = {
   flexDirection: 'row',
 }
 
+const lightText = {
+  color: '#FFFFFF'
+}
 //className="logoBlock"
 
 function Navbar(props) {
-  const auth = false
+  const auth = true
   const { match, location, history } = props
   console.log(location)
   console.log(match)
@@ -26,20 +29,20 @@ function Navbar(props) {
 
   return (
     <div>
-      <Pane display="flex" padding={16} background="tint2" borderRadius={3}>
+      <Pane display="flex" padding={16} background="#234361" borderRadius={3}>
         <Pane flex={1} alignItems="center" display="flex">
         { isArticle ?
           <BackButton is={Link} to="/"/>
           :
           <Pane flex={1} alignItems="center" display="flex">
             <Link to='/' style={{marginRight: '12px'}}>
-              <Heading size={600}>Articles</Heading>
+              <Heading size={600} style={lightText}>Articles</Heading>
             </Link>
             <Link to='/' style={{marginRight: '6px'}}>
-              <Text size={300}>Home</Text>
+              <Text size={300} style={lightText}>Home</Text>
             </Link>
             <Link to='/testing' style={{marginRight: '6px'}}>
-              <Text size={300}>Test</Text>
+              <Text size={300} style={lightText}>Test</Text>
             </Link>
           </Pane>
         }
@@ -48,8 +51,8 @@ function Navbar(props) {
           {/* Below you can see the marginRight property on a Button. */}
            {auth ?
             <Pane display="flex" alignItems="center">
-              <Avatar name="Jeroen Ransijn" size={30} marginRight={5} />
-              <Text size={400}> User name </Text>
+              <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
+              <Text size={400} style={lightText}> User name </Text>
             </Pane>
             :
             <Button is={Link} to="/login" appearance="primary">Login</Button>
