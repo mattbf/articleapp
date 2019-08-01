@@ -33,7 +33,8 @@ const menuText = {
 }
 //className="logoBlock"
 
-function UserMenu() {
+function UserMenu(props) {
+  const user = props.user
   return(
     <Popover
       position={Position.BOTTOM_RIGHT}
@@ -56,10 +57,10 @@ function UserMenu() {
         </Menu>
       }
     >
-      <Button marginRight={16} appearance="minimal">
+      <Button marginRight={16} appearance="minimal" style={{border: 'none'}}>
         <Pane display="flex" alignItems="center">
           <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
-          <Text size={400} style={lightText}> User name </Text>
+          <Text size={400} style={lightText}> {user.username} </Text>
         </Pane>
       </Button>
     </Popover>
@@ -74,10 +75,11 @@ function UserMenu() {
 function Navbar(props) {
   const auth = true
   const { match, location, history } = props
-  console.log(location)
-  console.log(match)
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
+  const user = {
+    username: 'Landon',
+  }
 
   return (
     <div>
@@ -104,7 +106,7 @@ function Navbar(props) {
            {auth ?
              <div>
                <Button is={Link} to="/login" appearance="primary">New Article</Button>
-               <UserMenu/>
+               <UserMenu user={user}/>
               </div>
             :
             <Button is={Link} to="/login" appearance="primary">Login</Button>
