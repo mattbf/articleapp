@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Pane, Button, Text, Heading } from 'evergreen-ui'
+import {
+  Pane,
+  Button,
+  Text,
+  Heading,
+  Avatar
+} from 'evergreen-ui'
 
 const logoBlock = {
   display: 'flex',
@@ -10,6 +16,7 @@ const logoBlock = {
 //className="logoBlock"
 
 function Navbar() {
+  const auth = false
   return (
     <div>
       <Pane display="flex" padding={16} background="tint2" borderRadius={3}>
@@ -26,7 +33,16 @@ function Navbar() {
         </Pane>
         <Pane>
           {/* Below you can see the marginRight property on a Button. */}
-          <Button appearance="primary">Login</Button>
+           {auth ?
+            <Pane display="flex" alignItems="center">
+              <Avatar name="Jeroen Ransijn" size={30} marginRight={5} />
+              <Text size={400}> User name </Text>
+            </Pane>
+            :
+            <Button appearance="primary">Login</Button>
+          }
+
+
         </Pane>
       </Pane>
     </div>
