@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
 import Comments from './Comments'
 import {
@@ -11,15 +12,12 @@ import {
   TextInput
 } from 'evergreen-ui'
 
-const center = {
-
-}
 
 function Article(props) {
   const article = props.location.state.props.article
-  const comments = article.comments
+  const url = props.url
   return(
-    <div style={center}>
+    <div>
       <Navbar/>
       <Pane padding={15} background="#F7F9FD" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
         <Pane display="flex" alignItems="center" marginBottom={10}>
@@ -28,9 +26,14 @@ function Article(props) {
             <Heading size={200} marginRight={5}>{article.author} |</Heading>
           </Link>
           <Heading size={200} marginRight={5}>{article.createdAt} |</Heading>
-          <Link>
-            <Heading size={200} marginRight={5}> {article.commentsCount} comments</Heading>
-          </Link>
+          <SectionLink
+            to={{
+              pathname: `/article/${url}#comments`,
+              state: {props},
+            }}
+          >
+            <Text size={300} marginRight={3}>{article.commentsCount} comments</Text>
+          </SectionLink>
         </Pane>
         <Heading size={800} marginBottom={20} textAlign='center' >{article.title}</Heading>
       </Pane>
@@ -48,3 +51,13 @@ function Article(props) {
 }
 
 export default Article
+
+// <SectionLink
+//   to={{
+//     pathname: `/article/${title}#comments`,
+//     state: {props},
+//   }}
+//   style={articleLink}
+// >
+//   <Text size={300} marginRight={3}>{props.article.commentsCount} comments</Text>
+// </SectionLink>
