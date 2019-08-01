@@ -1,5 +1,11 @@
 import React from 'react'
 import Comment from './Comment'
+import {
+  Pane,
+  Button,
+  Text,
+  Heading,
+} from 'evergreen-ui'
 
 const data = [
   {
@@ -28,12 +34,17 @@ const data = [
   },
 ]
 
-function Comments() {
+function Comments(props) {
+  const comments = props.comments
   return (
     <div>
-      {data.map((article, index) =>
-        <Comment key={index} article={article} index={index + 1}/>
-      )}
+      {comments ?
+        comments.map((comment, index) =>
+        <Comment key={index} comment={comment} index={index + 1}/>
+      )
+      :
+      <Text> Loading comments... </Text>
+    }
     </div>
   )
 }

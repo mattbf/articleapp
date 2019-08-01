@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import Navbar from './Navbar'
+import Comments from './Comments'
 import {
   Pane,
   Button,
@@ -16,6 +17,7 @@ const center = {
 
 function Article(props) {
   const article = props.location.state.props.article
+  const comments = article.comments
   return(
     <div style={center}>
       <Navbar/>
@@ -39,6 +41,7 @@ function Article(props) {
       </Pane>
       <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
         <Heading size={700} marginBottom={20} >Comments</Heading>
+        <Comments comments={article.comments} />
       </Pane>
     </div>
   )
