@@ -6,7 +6,12 @@ import {
   Text,
   Heading,
   Avatar,
-  BackButton
+  BackButton,
+  Menu,
+  Popover,
+  toaster,
+  Position,
+  Box,
 } from 'evergreen-ui'
 
 const logoBlock = {
@@ -17,7 +22,54 @@ const logoBlock = {
 const lightText = {
   color: '#FFFFFF'
 }
+
+const menuText = {
+  textDecoration: 'none',
+  color: '#000000',
+  textColor: '#000000',
+  '&:visited': {
+    textColor: '#000000',
+  }
+}
 //className="logoBlock"
+
+function UserMenu() {
+  return(
+    <Popover
+      position={Position.BOTTOM_RIGHT}
+      content={
+        <Menu>
+          <Menu.Group>
+            <Link to='/author/Landon' style={menuText}>
+              <Menu.Item>
+                Profile
+              </Menu.Item>
+            </Link>
+            <Menu.Item
+              onSelect={() => toaster.notify('Rename')}
+              secondaryText=">"
+              style={menuText}
+            >
+              Logout
+            </Menu.Item>
+          </Menu.Group>
+        </Menu>
+      }
+    >
+      <Button marginRight={16} appearance="minimal">
+        <Pane display="flex" alignItems="center">
+          <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
+          <Text size={400} style={lightText}> User name </Text>
+        </Pane>
+      </Button>
+    </Popover>
+  )
+}
+
+// <Pane display="flex" alignItems="center">
+//   <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
+//   <Text size={400} style={lightText}> User name </Text>
+// </Pane>
 
 function Navbar(props) {
   const auth = true
@@ -50,10 +102,10 @@ function Navbar(props) {
         <Pane>
           {/* Below you can see the marginRight property on a Button. */}
            {auth ?
-            <Pane display="flex" alignItems="center">
-              <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
-              <Text size={400} style={lightText}> User name </Text>
-            </Pane>
+             <div>
+               <Button is={Link} to="/login" appearance="primary">New Article</Button>
+               <UserMenu/>
+              </div>
             :
             <Button is={Link} to="/login" appearance="primary">Login</Button>
           }
