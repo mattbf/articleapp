@@ -4,11 +4,12 @@ import {Link} from 'react-router-dom'
 
 function ArticleBlock(props) {
   return(
-    <Pane display="flex" padding={16} background="tint2" borderRadius={3} margin={10}>
-      <Pane flex={1} alignItems="center" display="flex">
-        <Heading size={400} marginRight={10}>1.</Heading>
-        <Pane >
-          <Heading size={600}>{props.article.title}</Heading>
+    <Pane display="flex" padding={16} background="tint2" borderRadius={3} margin={10} position='relative'>
+      <Heading size={100} marginRight={10} position='absolute' left={5} top={3}>{props.index}</Heading>
+      <Pane flex={1} alignItems="top" display="flex">
+
+        <Pane marginLeft={10}>
+          <Heading size={600} >{props.article.title}</Heading>
           <Pane flex={1} alignItems="center" display="flex">
             <Link to='/testing' style={{marginTop: '-4px'}}>
               <Text size={300} marginRight={3}>{props.article.author}</Text>

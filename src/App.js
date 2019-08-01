@@ -5,21 +5,30 @@ import Home from './Components/Home'
 import Test from './Components/Test'
 import Navbar from './Components/Navbar'
 
+const centerBlock = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  width: '100%',
+  maxWidth: '1080px',
+}
+
 function App() {
   return (
     <Router>
-      <Navbar/>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-        </ul>
+      <div style={centerBlock}>
+        <Navbar/>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+          </ul>
 
-        <hr />
+          <hr />
 
-        <Route exact path="/" component={Home} />
-        <Route exact path="/test" component={Test} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/test" component={Test} />
+        </div>
       </div>
     </Router>
   );
