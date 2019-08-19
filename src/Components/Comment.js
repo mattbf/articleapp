@@ -6,6 +6,15 @@ import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 const commentWrapper = {
   display: 'flex',
   flexDirection: 'row',
+  marginBottom: '25px',
+
+}
+const commentBox = {
+  marginLeft: '15px',
+  border: 'solid',
+  borderColor: '#b9b9b9',
+  borderWidth: '0.5px',
+  borderRadius: '3px',
 
 }
 const commentToolbar = {
@@ -25,7 +34,7 @@ function Comment(props) {
   return(
     <Pane style={commentWrapper}>
       <Avatar name={comment.by} size={40} />
-      <Pane style={{marginLeft: '15px',}}>
+      <Pane style={commentBox}>
         <div style={commentToolbar}>
         <Link to={`/author/${comment.by}`}>
           <Text>
