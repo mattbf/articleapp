@@ -12,7 +12,7 @@ import {
 
 import "draft-js/dist/Draft.css"
 import "draftail/dist/draftail.css"
-import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE } from "draftail"
+import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail"
 
 
 const formatButton= {
@@ -27,10 +27,25 @@ function ArticleEditor() {
     //rawContentState={initial || null}
     //onSave={onSave}
     blockTypes={[
-      { type: BLOCK_TYPE.HEADER_THREE },
+      { type: BLOCK_TYPE.HEADER_THREE},
+      { type: BLOCK_TYPE.HEADER_TWO},
       { type: BLOCK_TYPE.UNORDERED_LIST_ITEM },
     ]}
     inlineStyles={[{ type: INLINE_STYLE.BOLD }, { type: INLINE_STYLE.ITALIC }]}
+
+    entityTypes={[
+      {type: ENTITY_TYPE.IMAGE},
+      {type: ENTITY_TYPE.EMBED},
+      {type: ENTITY_TYPE.LINK},
+      {type: ENTITY_TYPE.DOCUMENT},
+    ]}
+    blockTypes={[
+      {type: BLOCK_TYPE.HEADER_TWO},
+      {type: BLOCK_TYPE.HEADER_THREE},
+      {type: BLOCK_TYPE.UNORDERED_LIST_ITEM},
+      {type: BLOCK_TYPE.ORDERED_LIST_ITEM},
+    ]}
+    inlineStyles={[{type: INLINE_STYLE.BOLD}, {type: INLINE_STYLE.ITALIC}]}
   />
 )
 

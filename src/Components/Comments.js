@@ -37,7 +37,7 @@ const data = [
 function Comments(props) {
   const comments = props.comments
   return (
-    <div>
+    <div style={{backgroundColor: '#FFFFFF', padding: '25px'}}>
       {comments ?
         comments.map((comment, index) =>
         <Comment key={index} comment={comment} index={index + 1}/>
