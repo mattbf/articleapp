@@ -18,7 +18,7 @@ function ArticleEditor() {
   );
   const buttonSelected = false
   const editorRef = useRef(null);
-  const onChange = (editorState) => setEditorState({editorState});
+  const onChange = setEditorState;
   const focus = () => editorRef.current.editor.focus();
   function handleKeyCommand(command, editorState) {
     const newState = RichUtils.handleKeyCommand(editorState, command);
@@ -113,7 +113,7 @@ function ArticleEditor() {
         {label: 'Code Block', style: 'code-block'},
       ];
       const BlockStyleControls = (props) => {
-        const {editorState} = props;
+        //const {editorState} = props;
         const selection = editorState.getSelection();
         const blockType = editorState
           .getCurrentContent()
@@ -140,7 +140,8 @@ function ArticleEditor() {
         {label: 'Monospace', style: 'CODE'},
       ];
       const InlineStyleControls = (props) => {
-        const currentStyle = props.editorState.getCurrentInlineStyle();
+        // const currentStyle = props.editorState.getCurrentInlineStyle();
+        const currentStyle = editorState.getCurrentInlineStyle();
 
         return (
           <div className="RichEditor-controls">
