@@ -17,6 +17,7 @@ const articleLink = {
 function ArticleBlock(props) {
   var url = props.article.title.split(' ').join('-')
   var timeago = timeDifferenceForDate(props.article.createdAt)
+  var authorLink = `/author/${props.article.author}`
   return(
       <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
         <Pane flex={1} alignItems="top" display="flex">
@@ -35,7 +36,7 @@ function ArticleBlock(props) {
               </Link>
               <Pane flex={1} alignItems="center" display="flex">
                 <Text size={300} marginRight={3}>Posted by </Text>
-                <Link to='/testing' style={{marginTop: '-4px'}}>
+                <Link to={authorLink} style={{marginTop: '-4px'}}>
                   <Text size={300} marginRight={3}>{props.article.author}</Text>
                 </Link>
                 <Text size={300} marginRight={3}> | </Text>
