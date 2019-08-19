@@ -15,7 +15,13 @@ const commentBox = {
   borderColor: '#b9b9b9',
   borderWidth: '0.5px',
   borderRadius: '3px',
-
+  width: '90%',
+}
+const commentPane = {
+  borderTop: 'solid',
+  borderColor: '#b9b9b9',
+  borderWidth: '0.5px',
+  padding: '10px',
 }
 const commentToolbar = {
   display: 'flex',
@@ -24,6 +30,7 @@ const commentToolbar = {
   backgroundColor: '#f6f8fa',
   height: '20px',
   padding: '10px',
+
 }
 
 function Comment(props) {
@@ -45,7 +52,9 @@ function Comment(props) {
             commented {timeago}
           </Text>
         </div>
-        <Text> Comment {comment.by} </Text>
+        <div style={commentPane}>
+          <Text> Comment blha blah lah </Text>
+        </div>
       </Pane>
     </Pane>
   )

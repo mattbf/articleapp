@@ -60,10 +60,11 @@ const data = [
 ]
 
 function Feed() {
+  const articleCount = data.length
   return (
     <div>
       {data.map((article, index) =>
-        <ArticleBlock key={index} article={article} index={index + 1}/>
+        <ArticleBlock key={index} article={article} index={index + 1} number={articleCount - index}/>
       )}
     </div>
   )

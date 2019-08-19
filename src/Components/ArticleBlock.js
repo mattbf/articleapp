@@ -23,7 +23,7 @@ function ArticleBlock(props) {
         <Pane flex={1} alignItems="top" display="flex">
           <Pane>
             <Pane flex={1} alignItems="top" display="flex" flexDirection='row'>
-              <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.index}</Pill>
+              <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.number}</Pill>
             <Pane flex={1} alignItems="center" display="flex" flexDirection='column'>
               <Link
                 to={{
