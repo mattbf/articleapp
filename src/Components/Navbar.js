@@ -73,7 +73,7 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  const auth = false
+  const auth = true
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
@@ -89,13 +89,13 @@ function Navbar(props) {
           <BackButton is={Link} to="/"/>
           :
           <Pane flex={1} alignItems="center" display="flex">
-            <Link to='/' style={{marginRight: '12px'}}>
+            <Link to='/' style={{marginRight: '12px', textDecoration: 'none'}}>
               <Heading size={600} style={lightText}>Articles</Heading>
             </Link>
-            <Link to='/' style={{marginRight: '6px'}}>
+            <Link to='/' style={{marginRight: '6px', textDecoration: 'none'}}>
               <Text size={300} style={lightText}>Home</Text>
             </Link>
-            <Link to='/testing' style={{marginRight: '6px'}}>
+            <Link to='/testing' style={{marginRight: '6px', textDecoration: 'none'}}>
               <Text size={300} style={lightText}>Test</Text>
             </Link>
           </Pane>
@@ -105,7 +105,7 @@ function Navbar(props) {
           {/* Below you can see the marginRight property on a Button. */}
            {auth ?
              <div>
-               <Button is={Link} to="/login" appearance="primary">New Article</Button>
+               <Button is={Link} iconBefore="plus" to="/login" appearance="primary">New Article</Button>
                <UserMenu user={user}/>
               </div>
             :
