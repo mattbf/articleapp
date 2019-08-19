@@ -7,6 +7,7 @@ import Test from './Components/Test'
 import Login from './Components/Login'
 import Signup from './Components/Signup'
 import Article from './Components/Article'
+import CreateArticle from './Components/CreateArticle'
 
 const centerBlock = {
   marginLeft: 'auto',
@@ -52,6 +53,7 @@ function App() {
         <Route path="/testing" component={Test}/>
         <Route path="/author/:username" component={Test}/>
         <PrivateRoute path="/article/:title" component={Article}/>
+        <PrivateRoute path="/new" component={CreateArticle}/>
       </div>
       <div style={centerBlockBlank}>
         <Route path="/login" component={Login} />

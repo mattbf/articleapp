@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
 import Comments from './Comments'
+import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import {
   Pane,
   Button,
@@ -16,6 +17,7 @@ import {
 function Article(props) {
   const article = props.location.state.props.article
   const url = props.url
+  var timeago = timeDifferenceForDate(article.createdAt)
   return(
     <div>
       <Navbar/>
@@ -25,7 +27,7 @@ function Article(props) {
           <Link to={`/author/${article.author}`}>
             <Heading size={200} marginRight={5}>{article.author} |</Heading>
           </Link>
-          <Heading size={200} marginRight={5}>{article.createdAt} |</Heading>
+          <Heading size={200} marginRight={5}>{timeago} |</Heading>
           <SectionLink
             to={{
               pathname: `/article/${url}#comments`,

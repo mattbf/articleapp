@@ -105,7 +105,7 @@ function Navbar(props) {
           {/* Below you can see the marginRight property on a Button. */}
            {auth ?
              <div>
-               <Button is={Link} iconBefore="plus" to="/login" appearance="primary">New Article</Button>
+               <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
                <UserMenu user={user}/>
               </div>
             :
