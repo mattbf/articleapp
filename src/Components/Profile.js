@@ -73,6 +73,7 @@ const Editbutton = {
 
 function Profile() {
   const isCurrentUser = true
+
   return(
     <div>
       <Navbar/>
@@ -85,7 +86,7 @@ function Profile() {
             <Avatar name="Jeroen Ransijn" size={60} />
             <div style={UserInfoBox}>
               <Heading size={600}> Landon </Heading>
-              <Heading size={300}>Joined: </Heading>
+              <Heading size={300}> Joined: </Heading>
             </div>
             <div style={StatsArray}>
               {stats.map((stat, index) =>

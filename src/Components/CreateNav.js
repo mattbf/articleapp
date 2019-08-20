@@ -85,34 +85,12 @@ function Navbar(props) {
     <div>
       <Pane display="flex" padding={16} background="#234361" borderRadius={3}>
         <Pane flex={1} alignItems="center" display="flex">
-        { isArticle ?
-          <BackButton is={Link} to="/"/>
-          :
-          <Pane flex={1} alignItems="center" display="flex">
-            <Link to='/' style={{marginRight: '12px', textDecoration: 'none'}}>
-              <Heading size={600} style={lightText}>Articles</Heading>
-            </Link>
-            <Link to='/' style={{marginRight: '6px', textDecoration: 'none'}}>
-              <Text size={300} style={lightText}>Home</Text>
-            </Link>
-            <Link to='/testing' style={{marginRight: '6px', textDecoration: 'none'}}>
-              <Text size={300} style={lightText}>Test</Text>
-            </Link>
-          </Pane>
-        }
+          <Button intent="danger" height={32} marginRight={16} iconBefore="cross">
+            Cancel
+          </Button>
         </Pane>
         <Pane>
-          {/* Below you can see the marginRight property on a Button. */}
-           {auth ?
-             <div>
-               <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
-               <UserMenu user={user}/>
-              </div>
-            :
-            <Button is={Link} to="/login" appearance="primary">Login</Button>
-          }
-
-
+          <Button is={Link} to="/login" appearance="primary">Publish Article</Button>
         </Pane>
       </Pane>
     </div>

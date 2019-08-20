@@ -11,15 +11,15 @@ const commentWrapper = {
 }
 const commentBox = {
   marginLeft: '15px',
-  border: 'solid',
-  borderColor: '#b9b9b9',
+  // border: 'solid',
+  // borderColor: '#b9b9b9',
   borderWidth: '0.5px',
   borderRadius: '3px',
   width: '90%',
 }
 const commentPane = {
-  borderTop: 'solid',
-  borderColor: '#b9b9b9',
+  // borderTop: 'solid',
+  // borderColor: '#b9b9b9',
   borderWidth: '0.5px',
   padding: '10px',
 }
@@ -41,7 +41,7 @@ function Comment(props) {
   return(
     <Pane style={commentWrapper}>
       <Avatar name={comment.by} size={40} />
-      <Pane style={commentBox}>
+      <Pane elevation={1} style={commentBox}>
         <div style={commentToolbar}>
         <Link to={`/author/${comment.by}`}>
           <Text>
