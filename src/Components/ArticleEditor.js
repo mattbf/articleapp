@@ -34,8 +34,6 @@ function ArticleEditor() {
     inlineStyles={[{ type: INLINE_STYLE.BOLD }, { type: INLINE_STYLE.ITALIC }]}
 
     entityTypes={[
-      {type: ENTITY_TYPE.IMAGE},
-      {type: ENTITY_TYPE.EMBED},
       {type: ENTITY_TYPE.LINK},
       {type: ENTITY_TYPE.DOCUMENT},
     ]}

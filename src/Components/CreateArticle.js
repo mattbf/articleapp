@@ -6,6 +6,8 @@ import Comments from './Comments'
 import ArticleEditor from './ArticleEditor.js';
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import CreateNav from './CreateNav.js';
+import { Route, Redirect } from 'react-router'
+
 import {
   Pane,
   Button,
@@ -13,6 +15,7 @@ import {
   Heading,
   Avatar,
   TextInput,
+  Spinner
 } from 'evergreen-ui'
 
 const ArticleWrapper = {
@@ -40,11 +43,19 @@ const TitleBox = {
   alignItems: 'center'
 }
 
+const isLoading = false
+
+
 function CreateArticle() {
   const [title, setTitle] = useState(' ')
+  const [isSuccess, setIsSuccess] = useState(false)
+
+  function Publish() {
+    setIsSuccess(true)
+  }
   return(
     <div>
-      <CreateNav/>
+      <CreateNav publish={Publish}/>
       <div style={TitleBox}>
         <Heading marginBottom="10px" size={700}> Article Title </Heading>
         <TextInput
@@ -54,9 +65,24 @@ function CreateArticle() {
         />
       </div>
       <div style={ArticleWrapper}>
-        <Pane elevation={1} style={paper}>
-          <ArticleEditor/>
-        </Pane>
+        <Route path="/new" render={() => (
+          isSuccess ? (
+            <Redirect to="/"/>
+          ) : (
+            <div>
+              {!isLoading ?
+              <Pane elevation={1} style={paper}>
+                <ArticleEditor/>
+              </Pane>
+              :
+              <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
+                <Spinner />
+              </Pane>
+              }
+            </div>
+          )
+        )}/>
+
       </div>
     </div>
   )
