@@ -25,6 +25,7 @@ const Statbox ={
   border: 'solid',
   borderWidth: '0.5px',
   borderColor: '#dde8ff',
+  margin: '10px',
 
 }
 const StaboxBar = {
