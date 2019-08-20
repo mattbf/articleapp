@@ -12,6 +12,7 @@ import {
   Avatar,
   TextInput
 } from 'evergreen-ui'
+//import { Pane as SectionLink } from 'evergreen-ui'
 
 
 function Article(props) {
@@ -54,12 +55,12 @@ function Article(props) {
 
 export default Article
 
+
 // <SectionLink
 //   to={{
-//     pathname: `/article/${title}#comments`,
+//     pathname: `/article/${url}#comments`,
 //     state: {props},
 //   }}
-//   style={articleLink}
 // >
-//   <Text size={300} marginRight={3}>{props.article.commentsCount} comments</Text>
+//   <Text size={300} marginRight={3}>{article.commentsCount} comments</Text>
 // </SectionLink>
