@@ -2,6 +2,7 @@ import React from 'react'
 import { Pane, Button, Text, Heading, Icon, Pill } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
+import { PrettyUrl } from '../Utils/PrettyUrl.js';
 
 // position: 'absolute',
 // left: '5px',
@@ -15,7 +16,9 @@ const articleLink = {
 }
 
 function ArticleBlock(props) {
-  var url = props.article.title.split(' ').join('-')
+  //var url = props.article.title.split(' ').join('-')
+  const url = PrettyUrl(props.article.title)
+  console.log(url)
   var timeago = timeDifferenceForDate(props.article.createdAt)
   var authorLink = `/author/${props.article.author}`
   return(

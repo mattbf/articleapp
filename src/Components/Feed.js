@@ -27,19 +27,19 @@ const data = [
     ]
   },
   {
-    title: "article title - could be long",
+    title: "article title -- could be long",
     author: 'Landon',
     createdAt: new Date().toString(),
     commentsCount: '2'
   },
   {
-    title: "article title - could be long",
+    title: "article title-could be long",
     author: 'Landon',
     createdAt: new Date().toString(),
     commentsCount: '2'
   },
   {
-    title: "article title - could be long",
+    title: "article title could be long",
     author: 'Landon',
     createdAt: new Date().toString(),
     commentsCount: '2'
