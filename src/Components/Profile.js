@@ -10,7 +10,8 @@ import {
   Text,
   Heading,
   Avatar,
-  TextInput
+  TextInput,
+  IconButton
 } from 'evergreen-ui'
 
 const stats = [
@@ -36,7 +37,8 @@ const StatsArray = {
 const UserBox = {
   display: 'flex',
   flexDirection: 'row',
-  alignItems: 'center'
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
 }
 
 const ProfileBox = {
@@ -56,6 +58,12 @@ const biotext = {
   marginTop: '15px',
 }
 
+const Editbutton = {
+  alignSelf: 'flex-start',
+  marginLeft: 'auto',
+
+}
+
 function Profile() {
   return(
     <div>
@@ -67,6 +75,9 @@ function Profile() {
             <div style={UserInfoBox}>
               <Heading size={400}> Landon </Heading>
               <Heading size={200}>Joined: </Heading>
+            </div>
+            <div style={Editbutton}>
+              <IconButton appearance="minimal" icon="edit" />
             </div>
           </div>
           <div style={biotext}>
