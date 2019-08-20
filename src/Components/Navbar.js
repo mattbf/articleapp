@@ -59,7 +59,7 @@ function UserMenu(props) {
     >
       <Button marginRight={16} appearance="minimal" style={{border: 'none'}}>
         <Pane display="flex" alignItems="center">
-          <Avatar name="Jeroen Ransijn" size={30} marginRight={5} hashValue="id_124" />
+          <Avatar name={user.username} size={30} marginRight={5} hashValue="id_124" />
           <Text size={400} style={lightText}> {user.username} </Text>
         </Pane>
       </Button>

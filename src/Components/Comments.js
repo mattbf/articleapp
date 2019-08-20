@@ -45,6 +45,7 @@ function Comments(props) {
       :
       <Text> Loading comments... </Text>
     }
+    <Text> Add comments box here </Text>
     </div>
   )
 }
