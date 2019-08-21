@@ -9,6 +9,7 @@ import Signup from './Components/Signup'
 import Article from './Components/Article'
 import CreateArticle from './Components/CreateArticle'
 import Profile from './Components/Profile'
+import Todo from './Components/Todo'
 
 const centerBlock = {
   marginLeft: 'auto',
@@ -53,6 +54,7 @@ function App() {
       <div style={centerBlock}>
         <Route path="/" component={Home} exact/>
         <Route path="/testing" component={Test}/>
+        <Route path="/todos" component={Todo}/>
         <Route path="/author/:username" component={Profile}/>
         <PrivateRoute path="/article/:title" component={Article}/>
         <PrivateRoute path="/new" component={CreateArticle}/>

@@ -18,7 +18,6 @@ const articleLink = {
 function ArticleBlock(props) {
   //var url = props.article.title.split(' ').join('-')
   const url = PrettyUrl(props.article.title)
-  console.log(url)
   var timeago = timeDifferenceForDate(props.article.createdAt)
   var authorLink = `/author/${props.article.author}`
   return(
