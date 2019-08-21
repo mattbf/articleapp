@@ -20,6 +20,7 @@ function ArticleBlock(props) {
   const url = PrettyUrl(props.article.title)
   var timeago = timeDifferenceForDate(props.article.createdAt)
   var authorLink = `/author/${props.article.author}`
+  const commentsCount = props.article.comments.length
   return(
       <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
         <Pane flex={1} alignItems="top" display="flex">
@@ -42,7 +43,7 @@ function ArticleBlock(props) {
                   <Text size={300} marginRight={3}>{props.article.author}</Text>
                 </Link>
                 <Text size={300} marginRight={3}> | </Text>
-                <Text size={300}>  {timeago} | {props.article.commentsCount} comments</Text>
+                <Text size={300}>  {timeago} | {commentsCount} comments</Text>
               </Pane>
             </Pane>
             </Pane>

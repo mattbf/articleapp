@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import ArticleBlock from './ArticleBlock'
+import axios from 'axios'
 
 const data = [
   {
@@ -61,10 +62,23 @@ const data = [
 
 function Feed() {
   const articleCount = data.length
+  const [feed, setFeed] = useState([])
+
+  useEffect(() => {
+    axios.get('http://localhost:4000/articles/')
+        .then(response => {
+            setFeed(response.data);
+            //console.log(articles)
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+  })
+
   return (
     <div>
-      {data.map((article, index) =>
-        <ArticleBlock key={index} article={article} index={index + 1} number={articleCount - index}/>
+      {feed.map((article, index) =>
+        <ArticleBlock key={article._id} article={article} index={index + 1} number={articleCount - index}/>
       )}
     </div>
   )
