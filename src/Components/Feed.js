@@ -61,8 +61,8 @@ const data = [
 ]
 
 function Feed() {
-  const articleCount = data.length
   const [feed, setFeed] = useState([])
+  const articleCount = feed.length
 
   useEffect(() => {
     axios.get('http://localhost:4000/articles/')
