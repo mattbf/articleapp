@@ -5,6 +5,7 @@ import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
 import Comments from './Comments'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
+import { PrettyUrl } from '../Utils/PrettyUrl.js';
 import {
   Pane,
   Button,
@@ -17,15 +18,16 @@ import {
 
 
 function Article(props) {
-  const hook = props.match.params.title
-  const id = props.id
+  const slug = PrettyUrl(props.match.params.title)
+  //const id = props.id
   const [article, setArticle] = useState({
     data: [],
     timeago: '',
     commentsCount: 0
   })
   useEffect(() => {
-    const url = `http://localhost:4000/articles/${id}`
+    const url = `http://localhost:4000/articles/${slug}`
+    console.log(url)
     axios.get(url)
         .then(response => {
             setArticle({
@@ -42,7 +44,6 @@ function Article(props) {
 
   function ShowData() {
     console.log(article)
-    console.log(hook)
     //console.log(url)
   }
   console.log(props)
