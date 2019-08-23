@@ -10,6 +10,9 @@ import {
   Heading,
 } from 'evergreen-ui'
 
+// axios.defaults.withCredentials = true;
+// axios.defaults.crossdomain = true,
+
 function Home() {
   const [user, setUser] = useState({})
   const [fetch, setFetch] = useState({
@@ -18,9 +21,10 @@ function Home() {
     error: null
   })
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth/', {withCredentials: true})
+    axios.get('http://localhost:4000/user/auth', {withCredentials: true})
       .then(response => {
-        setUser(response.data);
+        //setUser(response.data);
+        console.log(response)
         setFetch({
           isLoading: false,
           isError: false,
@@ -36,10 +40,10 @@ function Home() {
         console.log(error);
       })
   }, [])
-  const auth = user.auth ? true : false
+  const auth = user.username ? true : false
   return(
     <div>
-      <Navbar user={user.username} auth={auth}/>
+      <Navbar user={"matt"} auth={auth}/> //user={user.username} auth={auth}
       <Feed/>
     </div>
   )
@@ -53,3 +57,10 @@ export default Home
 //   </Link>
 //   <Text size={500}>to view articles</Text>
 // </Pane>
+
+// {
+//     method: 'GET',
+//     url: 'http://localhost:4000/user/auth/',
+//     withCredentials: true,
+//     crossdomain: true,
+//   })

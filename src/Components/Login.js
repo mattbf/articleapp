@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'
+
 import {
   Pane,
   Button,
@@ -32,36 +33,43 @@ function Login(props) {
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
-    error: null
+    error: null,
+    isAuth: false
   })
 
   function tryLogin() {
     axios.post('http://localhost:4000/user/', {
       logemail: login.email,
       logpassword: login.password,
+      withCredentials: true
     })
         .then(response => {
             setFetch({
               isLoading: false,
               isError: false,
-              error: null
+              error: null,
+              isAuth: true
             })
-
-           if (location.state && location.state.nextPathname) {
-             browserHistory.push(location.state.nextPathname)
-           } else {
-             browserHistory.push('/')
-           }
+            console.log("logged in")
         })
         .catch(function (error){
             setFetch({
               isLoading: false,
               isError: true,
-              error: error
+              error: error,
+              isAuth: false
             })
             console.log(error);
         })
   }
+  // if (fetch.isAuth) {
+  //   if (location.state && location.state.nextPathname) {
+  //     browserHistory.push(location.state.nextPathname)
+  //   } else {
+  //     browserHistory.push('/')
+  //   }
+  // }
+
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
@@ -110,7 +118,9 @@ function Login(props) {
           </Link>
         </Pane>
       </Pane>
-
+      <Link to='/'>
+        Home
+      </Link>
     </div>
   )
 }
