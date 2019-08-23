@@ -71,7 +71,6 @@ function Login() {
           :
           null
         }
-
         <Pane flex={1} alignItems="center" display="flex" marginTop={15}>
           <Text size={300}>Don't have an account?</Text>
           <Link to='/signup' style={{marginTop: '-4px', marginLeft: '4px'}}>
