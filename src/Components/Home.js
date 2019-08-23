@@ -39,19 +39,17 @@ function Home() {
   const auth = user.auth ? true : false
   return(
     <div>
-      <Navbar user={user.username} auth={auth}/>
-      { auth ?
-        <Feed/>
-        :
-        <Pane flex={1} alignItems="center" display="flex">
-          <Link to='/login' style={{marginTop: '-2px'}}>
-            <Text size={500} marginRight={3}>Login</Text>
-          </Link>
-          <Text size={500}>to view articles</Text>
-        </Pane>
-      }
+      <Navbar user={"matt"} auth={true}/> //user={user.username} auth={auth}
+      <Feed/>
     </div>
   )
 }
 
 export default Home
+
+// <Pane flex={1} alignItems="center" display="flex">
+//   <Link to='/login' style={{marginTop: '-2px'}}>
+//     <Text size={500} marginRight={3}>Login</Text>
+//   </Link>
+//   <Text size={500}>to view articles</Text>
+// </Pane>

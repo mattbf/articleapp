@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-
+import axios from 'axios'
 import {
   Pane,
   Button,
@@ -35,7 +35,9 @@ const menuText = {
 //className="logoBlock"
 
 function UserMenu(props) {
+
   const user = props.user
+  const LogoutUser = props.logout
   return(
     <Popover
       position={Position.BOTTOM_RIGHT}
@@ -48,7 +50,7 @@ function UserMenu(props) {
               </Menu.Item>
             </Link>
             <Menu.Item
-              onSelect={() => toaster.notify('Rename')}
+              onSelect={LogoutUser}
               //secondaryText=">"
               style={menuText}
             >
@@ -79,7 +81,20 @@ function Navbar(props) {
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
   const user = props.user
-
+  //const location = props.location
+  const browserHistory = props.history
+  function LogoutUser() {
+    console.log("logout called")
+    console.log()
+    axios.get('http://localhost:4000/user/logout')
+        .then(response => {
+          console.log("user logged out")
+           history.push('/')
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+  }
   return (
     <div>
       <Pane display="flex" padding={16} background="#234361" borderRadius={3}>
@@ -105,7 +120,7 @@ function Navbar(props) {
            {auth ?
              <div>
                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
-               <UserMenu user={user}/>
+               <UserMenu user={user} logout={LogoutUser}/>
               </div>
             :
             <Button is={Link} to="/login" appearance="primary">Login</Button>
