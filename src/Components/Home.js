@@ -18,7 +18,7 @@ function Home() {
     error: null
   })
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth/')
+    axios.get('http://localhost:4000/user/auth/', {withCredentials: true})
       .then(response => {
         setUser(response.data);
         setFetch({
@@ -39,7 +39,7 @@ function Home() {
   const auth = user.auth ? true : false
   return(
     <div>
-      <Navbar user={"matt"} auth={true}/> //user={user.username} auth={auth}
+      <Navbar user={user.username} auth={auth}/>
       <Feed/>
     </div>
   )
