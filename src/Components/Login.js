@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import {
   Pane,
   Button,
@@ -18,7 +19,9 @@ const center = {
   marginTop: '25px'
 }
 
-function Login() {
+function Login(props) {
+  const location = props.location
+  const browserHistory = props.history
   const [login, setLogin] = useState({
     email: '',
     password: ''
@@ -31,6 +34,34 @@ function Login() {
     isError: false,
     error: null
   })
+
+  function tryLogin() {
+    axios.post('http://localhost:4000/user/', {
+      logemail: login.email,
+      logpassword: login.password,
+    })
+        .then(response => {
+            setFetch({
+              isLoading: false,
+              isError: false,
+              error: null
+            })
+
+           if (location.state && location.state.nextPathname) {
+             browserHistory.push(location.state.nextPathname)
+           } else {
+             browserHistory.push('/')
+           }
+        })
+        .catch(function (error){
+            setFetch({
+              isLoading: false,
+              isError: true,
+              error: error
+            })
+            console.log(error);
+        })
+  }
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
@@ -57,6 +88,7 @@ function Login() {
           width='100%'
           appearance="primary"
           style={{display: 'flex', justifyContent: 'center'}}
+          onClick={tryLogin}
         >
           {fetch.isLoading ?
             <Spinner size={16} style={{color: '#FFFFFF'}}/>

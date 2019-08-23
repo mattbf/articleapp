@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
+
 import {
   Pane,
   Button,
@@ -73,13 +74,11 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  const auth = true
+  const auth = props.auth
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-  const user = {
-    username: 'Landon',
-  }
+  const user = props.user
 
   return (
     <div>

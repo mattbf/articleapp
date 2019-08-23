@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Feed from './Feed'
 import Navbar from './Navbar'
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import {
   Pane,
   Button,
@@ -10,10 +11,35 @@ import {
 } from 'evergreen-ui'
 
 function Home() {
-  const auth = true
+  const [user, setUser] = useState({})
+  const [fetch, setFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
+  useEffect(() => {
+    axios.get('http://localhost:4000/user/auth/')
+      .then(response => {
+        setUser(response.data);
+        setFetch({
+          isLoading: false,
+          isError: false,
+          error: null
+        })
+      })
+      .catch(function(error) {
+        setFetch({
+          isLoading: false,
+          isError: true,
+          error: error
+        })
+        console.log(error);
+      })
+  }, [])
+  const auth = user.auth ? true : false
   return(
     <div>
-      <Navbar/>
+      <Navbar user={user.username} auth={auth}/>
       { auth ?
         <Feed/>
         :

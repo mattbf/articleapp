@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import {
   Pane,
   Button,
   Text,
   Heading,
   Avatar,
-  TextInput
+  TextInput,
+  Spinner
 } from 'evergreen-ui'
 
 const center = {
@@ -31,6 +33,28 @@ function Signup() {
     isError: false,
     error: null
   })
+  function Signup() {
+    axios.post('http://localhost:4000/user/', {
+      username: login.username,
+      email: login.email,
+      password: login.password,
+    })
+        .then(response => {
+            setFetch({
+              isLoading: false,
+              isError: false,
+              error: null
+            })
+        })
+        .catch(function (error){
+            setFetch({
+              isLoading: false,
+              isError: true,
+              error: error
+            })
+            console.log(error);
+        })
+  }
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
