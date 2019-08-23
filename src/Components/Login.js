@@ -26,6 +26,11 @@ function Login() {
   const updateField = (e) => {
     setLogin({...login, [e.target.name]: e.target.value})
   }
+  const [fetch, setFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
   return(
     <div style={center}>
       <Pane padding={15} background="tint1" display="flex" flexDirection="column" alignItems="center">
@@ -53,8 +58,20 @@ function Login() {
           appearance="primary"
           style={{display: 'flex', justifyContent: 'center'}}
         >
-            <Spinner size={16} style={{backgroundColor: '#FFFFFF'}}/>
+          {fetch.isLoading ?
+            <Spinner size={16} style={{color: '#FFFFFF'}}/>
+            :
+            "Login"
+          }
         </Button>
+        {fetch.isError ?
+          <div>
+            <Text color="#EC4C47" size={300}> {fetch.error.message}</Text>
+          </div>
+          :
+          null
+        }
+
         <Pane flex={1} alignItems="center" display="flex" marginTop={15}>
           <Text size={300}>Don't have an account?</Text>
           <Link to='/signup' style={{marginTop: '-4px', marginLeft: '4px'}}>
