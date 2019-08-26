@@ -6,6 +6,14 @@ import Navbar from './Navbar'
 import Comments from './Comments'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import { PrettyUrl } from '../Utils/PrettyUrl.js';
+
+import { convertFromHTML, convertToHTML } from "draft-convert"
+import { DraftailEditor, ENTITY_TYPE } from "draftail"
+import LinkSource from './LinkSource.js'
+import ViewOnlyEditor from './ViewOnlyEditor'
+
+import { Editor, EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
+
 import {
   Pane,
   Button,
@@ -17,6 +25,38 @@ import {
 } from 'evergreen-ui'
 //import { Pane as SectionLink } from 'evergreen-ui'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+
+//get html and convert to content
+const importerConfig = {
+  htmlToEntity: (nodeName, node, createEntity) => {
+    // a tags will become LINK entities, marked as mutable, with only the URL as data.
+    if (nodeName === "a") {
+      return createEntity(ENTITY_TYPE.LINK, "MUTABLE", { url: node.href })
+    }
+
+    if (nodeName === "img") {
+      return createEntity(ENTITY_TYPE.IMAGE, "IMMUTABLE", {
+        src: node.src,
+      })
+    }
+
+    if (nodeName === "hr") {
+      return createEntity(ENTITY_TYPE.HORIZONTAL_RULE, "IMMUTABLE", {})
+    }
+
+    return null
+  },
+  htmlToBlock: (nodeName) => {
+    if (nodeName === "hr" || nodeName === "img") {
+      // "atomic" blocks is how Draft.js structures block-level entities.
+      return "atomic"
+    }
+
+    return null
+  },
+}
+
+const fromHTML = (html) => convertToRaw(convertFromHTML(importerConfig)(html))
 
 function Article(props) {
   const articleTitle = props.match.params.title
@@ -70,17 +110,22 @@ function Article(props) {
         })
   }, [])
 
+
   function ShowData() {
     console.log(article)
     //console.log(url)
   }
-  console.log(props)
-  //const url = props.url
-  // var timeago = timeDifferenceForDate(article.createdAt)
-  // const commentsCount = article.comments.length
-
+  let editorState
+  const sampleMarkup =
+    '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
+    '<a href="http://www.facebook.com">Example link</a><br /><br/ >' +
+    '<img src="image.png" height="112" width="200" />';
+  const blocksFromHTML = convertFromHTML(sampleMarkup);
+  const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+  editorState = EditorState.createWithContent(contentState);
 
   return(
+
     <div>
       <Navbar/>
       <div style={{width: '100%', display: 'flex', alignItems: 'flex-end' }}>
@@ -127,7 +172,10 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-              <Text>{article.data.body}</Text>
+              //<Text>{article.data.body}</Text>
+              <Editor
+                editorState={editorState}
+              />
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
