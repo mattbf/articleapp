@@ -62,13 +62,13 @@ function Login(props) {
             console.log(error);
         })
   }
-  // if (fetch.isAuth) {
-  //   if (location.state && location.state.nextPathname) {
-  //     browserHistory.push(location.state.nextPathname)
-  //   } else {
-  //     browserHistory.push('/')
-  //   }
-  // }
+  if (fetch.isAuth) {
+    if (location.state && location.state.nextPathname) {
+      browserHistory.push(location.state.nextPathname)
+    } else {
+      browserHistory.push('/')
+    }
+  }
 
   return(
     <div style={center}>

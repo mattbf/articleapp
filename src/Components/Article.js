@@ -12,15 +12,17 @@ import {
   Text,
   Heading,
   Avatar,
-  TextInput
+  TextInput,
+  toaster
 } from 'evergreen-ui'
 //import { Pane as SectionLink } from 'evergreen-ui'
-
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 function Article(props) {
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
-  console.log(slug)
+  const url = `http://localhost:4000/articles/${slug}`
+
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -38,7 +40,7 @@ function Article(props) {
       isError: false,
       error: null
     })
-    const url = `http://localhost:4000/articles/${slug}`
+
     console.log(url)
     axios.get(url)
         .then(response => {
@@ -76,9 +78,17 @@ function Article(props) {
   //const url = props.url
   // var timeago = timeDifferenceForDate(article.createdAt)
   // const commentsCount = article.comments.length
+
+
   return(
     <div>
       <Navbar/>
+      <div style={{width: '100%', display: 'flex', alignItems: 'flex-end' }}>
+        <CopyToClipboard text={url}
+          onCopy={() => toaster.notify('Article URL copied to clipboard')}>
+          <Button style={{marginTop: '15px', marginLeft: 'auto'}} marginRight={12} iconAfter="link">Share</Button>
+        </CopyToClipboard>
+      </div>
       {fetch.isError ?
         // fetch.error.statuscode == 401 ?
         fetch.error.code == 401 ?

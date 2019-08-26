@@ -9,11 +9,20 @@ import {
   Text,
   Heading,
 } from 'evergreen-ui'
-
+import { useSimpleState } from 'use-simple-state';
+//import { logIn } from '../Store';
 
 //axios.defaults.crossdomain = true,
 
 function Home() {
+  // const [state, dispatch] = useSimpleState();
+  // const user = state.user
+  // const auth = state.isAuth
+  // const logIn = () => ({ type: 'LOG_IN' });
+  //console.log(state)
+  // useEffect(() => {
+  //   dispatch(logIn())
+  // }, [])
   const [user, setUser] = useState({})
   const [fetch, setFetch] = useState({
     isLoading: false,
