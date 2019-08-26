@@ -10,7 +10,7 @@ import Article from './Components/Article'
 import CreateArticle from './Components/CreateArticle'
 import Profile from './Components/Profile'
 import Todo from './Components/Todo'
-import Admin from './Components/Admin'
+import Admin from './Components/Admin/Admin'
 
 import axios from 'axios'
 
