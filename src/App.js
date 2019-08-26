@@ -10,6 +10,8 @@ import Article from './Components/Article'
 import CreateArticle from './Components/CreateArticle'
 import Profile from './Components/Profile'
 import Todo from './Components/Todo'
+import Admin from './Components/Admin'
+
 import axios from 'axios'
 
 import { SimpleStateProvider } from 'use-simple-state';
@@ -119,6 +121,7 @@ function PrivateRoute({ component: Component, ...rest }) {
           <Route path="/author/:username" component={Profile}/>
           <PrivateRoute path="/article/:title" component={Article}/>
           <PrivateRoute path="/new" component={CreateArticle}/>
+          <Route path="/admin" component={Admin}/>
         </div>
         <div style={centerBlockBlank}>
           <Route path="/login" component={Login} />
