@@ -10,8 +10,8 @@ import {
   Heading,
 } from 'evergreen-ui'
 
-// axios.defaults.withCredentials = true;
-// axios.defaults.crossdomain = true,
+
+//axios.defaults.crossdomain = true,
 
 function Home() {
   const [user, setUser] = useState({})
@@ -21,7 +21,7 @@ function Home() {
     error: null
   })
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth', {withCredentials: true})
+    axios.get('http://localhost:4000/user/auth')
       .then(response => {
         //setUser(response.data);
         console.log(response)
