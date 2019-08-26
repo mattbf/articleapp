@@ -13,6 +13,8 @@ import {
 import "draft-js/dist/Draft.css"
 import "draftail/dist/draftail.css"
 import { DraftailEditor, BLOCK_TYPE, INLINE_STYLE, ENTITY_TYPE } from "draftail"
+import { convertToRaw, convertFromRaw } from "draft-js"
+import { convertFromHTML, convertToHTML } from "draft-convert"
 
 
 const formatButton= {
@@ -21,11 +23,52 @@ const formatButton= {
   border: '0'
 }
 
+//converting editor content
+const exporterConfig = {
+  blockToHTML: (block) => {
+    if (block.type === BLOCK_TYPE.BLOCKQUOTE) {
+      return <blockquote />
+    }
+
+    // Discard atomic blocks, as they get converted based on their entity.
+    if (block.type === BLOCK_TYPE.ATOMIC) {
+      return {
+        start: "",
+        end: "",
+      }
+    }
+
+    return null
+  },
+
+  entityToHTML: (entity, originalText) => {
+    if (entity.type === ENTITY_TYPE.LINK) {
+      return <a href={entity.data.url}>{originalText}</a>
+    }
+
+    if (entity.type === ENTITY_TYPE.IMAGE) {
+      return <img src={entity.data.src} alt={entity.data.alt} />
+    }
+
+    if (entity.type === ENTITY_TYPE.HORIZONTAL_RULE) {
+      return <hr />
+    }
+
+    return originalText
+  },
+}
+
+const toHTML = (raw) =>
+  raw ? convertToHTML(exporterConfig)(convertFromRaw(raw)) : ""
+
 function ArticleEditor() {
   const editor = (
   <DraftailEditor
     //rawContentState={initial || null}
     //onSave={onSave}
+    onSave={(raw) => {
+      console.log(toHTML(raw))
+    }}
     blockTypes={[
       { type: BLOCK_TYPE.HEADER_THREE},
       { type: BLOCK_TYPE.HEADER_TWO},
