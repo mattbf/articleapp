@@ -103,7 +103,7 @@ function Article(props) {
               <Link to={`/author/${article.data.author}`}>
                 <Heading size={200} marginRight={5}>{article.data.author} |</Heading>
               </Link>
-              <Heading size={200} marginRight={5}>{article.data.timeago} |</Heading>
+              <Heading size={200} marginRight={5}>{article.timeago} |</Heading>
               <SectionLink
                 to={{
                   pathname: `/article/${article.data.title}#comments`,
@@ -136,13 +136,3 @@ function Article(props) {
 }
 
 export default Article
-
-
-// <SectionLink
-//   to={{
-//     pathname: `/article/${url}#comments`,
-//     state: {props},
-//   }}
-// >
-//   <Text size={300} marginRight={3}>{article.commentsCount} comments</Text>
-// </SectionLink>
