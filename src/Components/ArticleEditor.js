@@ -61,14 +61,15 @@ const exporterConfig = {
 const toHTML = (raw) =>
   raw ? convertToHTML(exporterConfig)(convertFromRaw(raw)) : ""
 
-function ArticleEditor() {
+function ArticleEditor(props) {
   const editor = (
   <DraftailEditor
     //rawContentState={initial || null}
     //onSave={onSave}
-    onSave={(raw) => {
-      console.log(toHTML(raw))
-    }}
+    // onSave={(raw) => {
+    //   console.log(toHTML(raw))
+    // }}
+    onSave={(raw) => props.onEdit(toHTML(raw))}
     blockTypes={[
       { type: BLOCK_TYPE.HEADER_THREE},
       { type: BLOCK_TYPE.HEADER_TWO},

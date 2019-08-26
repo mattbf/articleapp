@@ -50,10 +50,7 @@ const isLoading = false
 
 function CreateArticle() {
   const [title, setTitle] = useState(' ')
-  const [articleInfo, setArticleInfo] = useState({
-    body: '',
-    slug: title ? PrettyUrl(title) : ''
-  })
+  const [articleInfo, setArticleInfo] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -96,6 +93,10 @@ function CreateArticle() {
         console.log(error);
       })
   }
+  function onEdit(content) {
+    setArticleInfo(content)
+    console.log(articleInfo)
+  }
   return(
     <div>
       <CreateNav publish={Publish}/>
@@ -120,7 +121,7 @@ function CreateArticle() {
                 </Pane>
                 :
                 <Pane elevation={1} style={paper}>
-                  <ArticleEditor/>
+                  <ArticleEditor onEdit={onEdit}/>
                 </Pane>
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
