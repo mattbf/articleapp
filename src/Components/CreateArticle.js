@@ -70,7 +70,7 @@ function CreateArticle() {
       url: 'http://localhost:4000/articles/add',
       data:{
       	title: title,
-      	author: "author",
+      	author: "Not an author",
       	body: articleInfo.body,
       	slug: title ? PrettyUrl(title) : ''
       }
@@ -114,12 +114,17 @@ function CreateArticle() {
             <Redirect to="/"/>
           ) : (
             <div>
+            {
+              fetch.isError ?
+              <Pane background="redTint"style={paper} display="flex" alignItems="center" justifyContent="center" style={{height: '50px'}}>
+                <div style={{color: "#BF0E08"}}> Error: {fetch.error.message} </div>
+              </Pane>
+              :
+              null
+            }
+
+            <div>
               {!fetch.isLoading ?
-                fetch.isError ?
-                <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
-                  <div> Error: {fetch.error.message} </div>
-                </Pane>
-                :
                 <Pane elevation={1} style={paper}>
                   <ArticleEditor onEdit={onEdit}/>
                 </Pane>
@@ -129,6 +134,7 @@ function CreateArticle() {
                 </Pane>
               }
             </div>
+          </div>
           )
         )}/>
 
