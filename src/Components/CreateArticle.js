@@ -71,7 +71,7 @@ function CreateArticle() {
       data:{
       	title: title,
       	author: "Not an author",
-      	body: articleInfo.body,
+      	body: articleInfo,
       	slug: title ? PrettyUrl(title) : ''
       }
     })
