@@ -13,21 +13,27 @@ function ArticleTable(props) {
     <div>
     <Table>
       <Table.Head>
-        <Table.SearchHeaderCell />
         <Table.TextHeaderCell>
-          Last Activity
+          Title
         </Table.TextHeaderCell>
         <Table.TextHeaderCell>
-          ltv
+          Author
+        </Table.TextHeaderCell>
+        <Table.TextHeaderCell>
+          posted
+        </Table.TextHeaderCell>
+        <Table.TextHeaderCell>
+          Comments
         </Table.TextHeaderCell>
       </Table.Head>
       <Table.Body height={240}>
         {articles.map(article => (
           <Table.Row key={article._id} isSelectable onSelect={() => alert(article.title)}>
+            <Table.TextCell>{article.title}</Table.TextCell>
             <Table.TextCell>{article.author}</Table.TextCell>
             <Table.TextCell>{article.createdAt}</Table.TextCell>
             <Table.TextCell isNumber>
-              10
+              {article.comments.length}
             </Table.TextCell>
           </Table.Row>
         ))}

@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import UserTable from './UserTable'
 import ArticleTable from './ArticleTable'
+import {
+  Heading,
+} from 'evergreen-ui'
 
 const AdminWrapper = {
   display: 'flex',
@@ -120,7 +123,10 @@ function Admin() {
           userData.length == 0 || null ?
           <div> No Users </div>
           :
-          <UserTable users={userData}/>
+          <div>
+            <Heading> Users </Heading>
+            <UserTable users={userData}/>
+          </div>
         }
       </div>
       <div style={Content}>
@@ -133,7 +139,10 @@ function Admin() {
         allArticles.length == 0 || null ?
         <div> No Articles </div>
         :
-          <ArticleTable articles={allArticles}/>
+          <div>
+            <Heading> Articles </Heading>
+            <ArticleTable articles={allArticles}/>
+          </div>
       }
       </div>
     </div>
