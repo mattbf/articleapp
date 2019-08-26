@@ -7,6 +7,8 @@ import ArticleEditor from './ArticleEditor.js';
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import CreateNav from './CreateNav.js';
 import { Route, Redirect } from 'react-router'
+import {PrettyUrl} from '../Utils/PrettyUrl'
+import axios from 'axios'
 
 import {
   Pane,
@@ -48,10 +50,51 @@ const isLoading = false
 
 function CreateArticle() {
   const [title, setTitle] = useState(' ')
+  const [articleInfo, setArticleInfo] = useState({
+    body: '',
+    slug: title ? PrettyUrl(title) : ''
+  })
   const [isSuccess, setIsSuccess] = useState(false)
+  const [fetch, setFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
 
   function Publish() {
-    setIsSuccess(true)
+    setFetch({
+      isLoading: true,
+      isError: false,
+      error: null
+    })
+    axios.post('http://localhost:4000/articles/add')
+    axios({
+      method: 'post',
+      url: 'http://localhost:4000/articles/add',
+      data:{
+      	title: title,
+      	author: "author",
+      	body: articleInfo.body,
+      	slug: title ? PrettyUrl(title) : ''
+      }
+    })
+      .then(response => {
+        console.log(response)
+        setFetch({
+          isLoading: false,
+          isError: false,
+          error: null
+        })
+        setIsSuccess(true)
+      })
+      .catch(function(error) {
+        setFetch({
+          isLoading: false,
+          isError: true,
+          error: error
+        })
+        console.log(error);
+      })
   }
   return(
     <div>
@@ -70,14 +113,19 @@ function CreateArticle() {
             <Redirect to="/"/>
           ) : (
             <div>
-              {!isLoading ?
-              <Pane elevation={1} style={paper}>
-                <ArticleEditor/>
-              </Pane>
-              :
-              <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
-                <Spinner />
-              </Pane>
+              {!fetch.isLoading ?
+                fetch.isError ?
+                <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
+                  <div> Error: {fetch.error.message} </div>
+                </Pane>
+                :
+                <Pane elevation={1} style={paper}>
+                  <ArticleEditor/>
+                </Pane>
+                :
+                <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
+                  <Spinner />
+                </Pane>
               }
             </div>
           )

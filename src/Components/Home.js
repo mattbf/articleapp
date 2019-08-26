@@ -9,7 +9,7 @@ import {
   Text,
   Heading,
 } from 'evergreen-ui'
-import { useSimpleState } from 'use-simple-state';
+//import { useSimpleState } from 'use-simple-state';
 //import { logIn } from '../Store';
 
 //axios.defaults.crossdomain = true,
@@ -30,7 +30,7 @@ function Home() {
     error: null
   })
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth')
+    axios.get('http://localhost:4000/user/auth', { useCredentails: true })
       .then(response => {
         setUser(response.data);
         console.log(response)
@@ -52,7 +52,7 @@ function Home() {
   const auth = user.username ? true : false
   return(
     <div>
-      <Navbar user={user} auth={auth}/> //user={user.username} auth={auth}
+      <Navbar user={user} auth={auth}/> 
       <Feed/>
     </div>
   )
