@@ -117,7 +117,7 @@ function Feed() {
           </div>
           :
           <div>
-            {feed.map((article, index) =>
+            {feed.slice(0).reverse().map((article, index) =>
               <ArticleBlock key={article._id} article={article} index={index + 1} number={articleCount - index}/>
             )}
           </div>
