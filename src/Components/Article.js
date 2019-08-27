@@ -10,9 +10,12 @@ import { PrettyUrl } from '../Utils/PrettyUrl.js';
 import { convertFromHTML, convertToHTML } from "draft-convert"
 import { DraftailEditor, ENTITY_TYPE } from "draftail"
 import LinkSource from './LinkSource.js'
-import ViewOnlyEditor from './ViewOnlyEditor'
+//import ViewOnlyEditor from './ViewOnlyEditor'
 
-import { Editor, EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
+import ArticleEditor from './ArticleEditor.js';
+import htmlToDraft from 'html-to-draftjs';
+
+import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
 
 import {
   Pane,
@@ -26,78 +29,7 @@ import {
 //import { Pane as SectionLink } from 'evergreen-ui'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-
-const exampleJson = {
-    "blocks": [
-        {
-            "key": "8i090",
-            "text": "Hello CodePulse!",
-            "type": "unstyled",
-            "depth": 0,
-            "inlineStyleRanges": [
-                {
-                    "offset": 0,
-                    "length": 16,
-                    "style": "BOLD"
-                }
-            ],
-            "entityRanges": [],
-            "data": {}
-        },
-        {
-            "key": "42ncd",
-            "text": "This text should be underlined.",
-            "type": "unstyled",
-            "depth": 0,
-            "inlineStyleRanges": [
-                {
-                    "offset": 0,
-                    "length": 31,
-                    "style": "UNDERLINE"
-                }
-            ],
-            "entityRanges": [],
-            "data": {}
-        },
-        {
-            "key": "327r6",
-            "text": "And this text should be italic.",
-            "type": "unstyled",
-            "depth": 0,
-            "inlineStyleRanges": [
-                {
-                    "offset": 0,
-                    "length": 31,
-                    "style": "ITALIC"
-                }
-            ],
-            "entityRanges": [],
-            "data": {}
-        }
-    ],
-    "entityMap": {}
-}
-const loadingJson = {
-    "blocks": [
-        {
-            "key": "0000",
-            "text": "Loading Article",
-            "type": "unstyled",
-            "depth": 0,
-            "inlineStyleRanges": [
-                {
-                    "offset": 0,
-                    "length": 16,
-                    "style": "BOLD"
-                }
-            ],
-            "entityRanges": [],
-            "data": {}
-        },
-    ],
-    "entityMap": {}
-}
-
+const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
 function Article(props) {
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
@@ -113,7 +45,13 @@ function Article(props) {
     timeago: '',
     commentsCount: 0
   })
-  //const editorState = EditorState.createWithContent(loadingJson);
+
+  const contentState = convertFromRaw(content);
+  const [editorState, setEditorState] = useState(content);
+  const onChangeEditor = (editorState) => {
+    //setEditorState(editorState)
+  }
+
   useEffect(() => {
     setFetch({
       isLoading: true,
@@ -156,23 +94,23 @@ function Article(props) {
 
   //convert json obj to draftjs readable
   //console.log(article.data.length != 0 ? "true" : "fasle")
-  const sampleMarkup =
-  '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
-  '<a href="http://www.facebook.com">Example link</a>';
-
-  if (article.data.length != 0) {
-    // console.log(article.data)
-    // console.log(exampleJson)
-    // const content = convertFromRaw(article.data)
-    const blocksFromHTML = convertFromHTML(sampleMarkup)
-    console.log(blocksFromHTML)
-    const newState = ContentState.createFromBlockArray(
-      blocksFromHTML.blockMap,
-      blocksFromHTML.entityMap
-    );
-    const editorState = EditorState.createWithContent(newState);
-    // console.log('Converted: ' + editorState)
-  }
+  // const sampleMarkup =
+  // '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
+  // '<a href="http://www.facebook.com">Example link</a>';
+  //
+  // if (article.data.length != 0) {
+  //   // console.log(article.data)
+  //   // console.log(exampleJson)
+  //   // const content = convertFromRaw(article.data)
+  //   const blocksFromHTML = convertFromHTML(sampleMarkup)
+  //   console.log(blocksFromHTML)
+  //   const newState = ContentState.createFromBlockArray(
+  //     blocksFromHTML.blockMap,
+  //     blocksFromHTML.entityMap
+  //   );
+  //   const editorState = EditorState.createWithContent(newState);
+  //   // console.log('Converted: ' + editorState)
+  // }
 
   // console.log("from db: ")
   // console.log(article.data)
@@ -228,8 +166,7 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-
-              "Article"
+              <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
