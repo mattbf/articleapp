@@ -26,26 +26,28 @@ function Home() {
     error: null
   })
   useEffect(() => {
-    axios.get('http://localhost:4000/user/auth', { useCredentails: true })
-      .then(response => {
-        //setUser(response.data);
-        globalActions.setUser(response.data)//check this
-        globalActions.LogInOut(true)
-        console.log(response)
-        setFetch({
-          isLoading: false,
-          isError: false,
-          error: null
+    if (!user.username) {
+      axios.get('http://localhost:4000/user/auth', { useCredentails: true })
+        .then(response => {
+          //setUser(response.data);
+          globalActions.setUser(response.data)//check this
+          globalActions.LogInOut(true)
+          console.log(response)
+          setFetch({
+            isLoading: false,
+            isError: false,
+            error: null
+          })
         })
-      })
-      .catch(function(error) {
-        setFetch({
-          isLoading: false,
-          isError: true,
-          error: error
+        .catch(function(error) {
+          setFetch({
+            isLoading: false,
+            isError: true,
+            error: error
+          })
+          console.log(error);
         })
-        console.log(error);
-      })
+    }
   }, [])
   // const auth = user.username ? true : false
   return(
