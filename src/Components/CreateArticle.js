@@ -10,7 +10,8 @@ import { Route, Redirect } from 'react-router'
 import {PrettyUrl} from '../Utils/PrettyUrl'
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
-import { convertToRaw } from "draft-js";
+
+import { EditorState, convertToRaw } from 'draft-js';
 
 
 import {
@@ -62,10 +63,12 @@ function CreateArticle() {
     isError: false,
     error: null
   })
-  // const [editorState, setEditorState] = React.useState(
-  //   EditorState.createEmpty()
-  // );
-
+  const [editorState, setEditorState] = React.useState(
+    EditorState.createEmpty()
+  );
+  const onChangeEditor = (editorState) => {
+    setEditorState(editorState)
+  }
 
   function Publish() {
     setFetch({
@@ -140,7 +143,7 @@ function CreateArticle() {
             <div>
               {!fetch.isLoading ?
                 <Pane elevation={1} style={paper}>
-                  <ArticleEditor/>
+                  <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
                 </Pane>
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
