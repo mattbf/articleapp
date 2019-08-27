@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import useGlobal from '../GlobalState/Store/Store';
 
 import {
   Pane,
@@ -21,12 +22,14 @@ const center = {
 }
 
 function Login(props) {
+  const [globalState, globalActions] = useGlobal();
   const location = props.location
   const browserHistory = props.history
   const [login, setLogin] = useState({
     email: '',
     password: ''
   })
+  const from = props.from
   const updateField = (e) => {
     setLogin({...login, [e.target.name]: e.target.value})
   }
@@ -36,6 +39,15 @@ function Login(props) {
     error: null,
     isAuth: false
   })
+  function DisplayProps() {
+    console.log(props)
+  }
+  const goBackFunc = props.history.goBack
+
+  function backtoprev() {
+    goBackFunc()
+  }
+
 
   function tryLogin() {
     axios.post('http://localhost:4000/user/', {
@@ -44,12 +56,15 @@ function Login(props) {
       withCredentials: true
     })
         .then(response => {
+            globalActions.setUser(response.data.user)//check this
             setFetch({
               isLoading: false,
               isError: false,
               error: null,
               isAuth: true
             })
+            globalActions.LogInOut(true)
+
             console.log("logged in")
         })
         .catch(function (error){
@@ -64,7 +79,7 @@ function Login(props) {
   }
   if (fetch.isAuth) {
     if (location.state && location.state.nextPathname) {
-      browserHistory.push(location.state.nextPathname)
+      goBackFunc() //browserHistory.push(location.state.nextPathname)
     } else {
       browserHistory.push('/')
     }
@@ -121,6 +136,22 @@ function Login(props) {
       <Link to='/'>
         Home
       </Link>
+      <Button
+        width='100%'
+        appearance="primary"
+        style={{display: 'flex', justifyContent: 'center'}}
+        onClick={DisplayProps}
+      >
+        props
+      </Button>
+      <Button
+        width='100%'
+        appearance="primary"
+        style={{display: 'flex', justifyContent: 'center'}}
+        onClick={backtoprev}
+      >
+        goBack
+      </Button>
     </div>
   )
 }

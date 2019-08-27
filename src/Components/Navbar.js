@@ -84,14 +84,12 @@ function Navbar(props) {
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
 
-  //const location = props.location
   const browserHistory = props.history
   function LogoutUser() {
-    console.log("logout called")
-    console.log()
     axios.get('http://localhost:4000/user/logout')
         .then(response => {
           console.log("user logged out")
+          globalActions.LogInOut(false)
            history.push('/')
         })
         .catch(function (error){

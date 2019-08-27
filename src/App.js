@@ -93,11 +93,12 @@ function App() {
 //console.log(initialState)
 
 function PrivateRoute({ component: Component, ...rest }) {
+  const [globalState, globalActions] = useGlobal();
   return (
     <Route
       {...rest}
       render={props =>
-        user.isAuth ? (
+        globalState.isAuth ? (
           <Component {...props} />
         ) : (
           <Redirect
