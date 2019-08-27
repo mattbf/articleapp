@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios'
+import useGlobal from '../GlobalState/Store/Store';
 import {
   Pane,
   Button,
@@ -76,7 +77,8 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  const auth = props.auth
+  const [globalState, globalActions] = useGlobal();
+  const auth = globalState.isAuth
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
