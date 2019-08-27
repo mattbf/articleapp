@@ -9,6 +9,7 @@ import CreateNav from './CreateNav.js';
 import { Route, Redirect } from 'react-router'
 import {PrettyUrl} from '../Utils/PrettyUrl'
 import axios from 'axios'
+import useGlobal from '../GlobalState/Store/Store';
 
 import {
   Pane,
@@ -49,6 +50,10 @@ const isLoading = false
 
 
 function CreateArticle() {
+  const [globalState, globalActions] = useGlobal();
+  const user = globalState.user
+  const auth = globalState.isAuth
+  
   const [title, setTitle] = useState(' ')
   const [articleInfo, setArticleInfo] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)

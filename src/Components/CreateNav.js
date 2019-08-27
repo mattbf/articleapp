@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
+import useGlobal from '../GlobalState/Store/Store';
 import {
   Pane,
   Button,
@@ -34,14 +35,13 @@ const menuText = {
 }
 
 function Navbar(props) {
-  const auth = true
+  const [globalState, globalActions] = useGlobal();
+  const user = globalState.user
+  const auth = globalState.isAuth
   const PublishArticle = props.publish
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-  const user = {
-    username: 'Landon',
-  }
 
   return (
     <div>

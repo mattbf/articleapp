@@ -127,7 +127,7 @@ const exampleuserobj = {
           <Route path="/todos" component={Todo}/>
           <Route path="/author/:username" component={Profile}/>
           <PrivateRoute path="/article/:title" component={Article}/>
-          <PrivateRoute path="/new" component={CreateArticle}/>
+          <Route path="/new" component={CreateArticle}/>
           <Route path="/admin" component={Admin}/>
         </div>
         <div style={centerBlockBlank}>

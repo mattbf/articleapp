@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import useGlobal from '../GlobalState/Store/Store';
 import {
   Pane,
   Button,
@@ -20,6 +21,7 @@ const center = {
 }
 
 function Signup() {
+  const [globalState, globalActions] = useGlobal();
   const [login, setLogin] = useState({
     username: '',
     email: '',
@@ -40,11 +42,13 @@ function Signup() {
       password: login.password,
     })
         .then(response => {
+            globalActions.setUser(response.data.user)//check this
             setFetch({
               isLoading: false,
               isError: false,
               error: null
             })
+            globalActions.LogInOut(true)
         })
         .catch(function (error){
             setFetch({

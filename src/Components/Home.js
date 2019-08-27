@@ -3,6 +3,7 @@ import Feed from './Feed'
 import Navbar from './Navbar'
 import { Link } from "react-router-dom";
 import axios from 'axios'
+import useGlobal from './GlobalState/Store/Store';
 import {
   Pane,
   Button,
@@ -15,15 +16,10 @@ import {
 //axios.defaults.crossdomain = true,
 
 function Home() {
-  // const [state, dispatch] = useSimpleState();
-  // const user = state.user
-  // const auth = state.isAuth
-  // const logIn = () => ({ type: 'LOG_IN' });
-  //console.log(state)
-  // useEffect(() => {
-  //   dispatch(logIn())
-  // }, [])
-  const [user, setUser] = useState({})
+  const [globalState, globalActions] = useGlobal();
+  const user = globalState.user
+  const auth = globalState.isAuth
+  //const [user, setUser] = useState({})
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
@@ -32,7 +28,9 @@ function Home() {
   useEffect(() => {
     axios.get('http://localhost:4000/user/auth', { useCredentails: true })
       .then(response => {
-        setUser(response.data);
+        //setUser(response.data);
+        globalActions.setUser(response.data.user)//check this
+        globalActions.LogInOut(true)
         console.log(response)
         setFetch({
           isLoading: false,
@@ -49,10 +47,10 @@ function Home() {
         console.log(error);
       })
   }, [])
-  const auth = user.username ? true : false
+  // const auth = user.username ? true : false
   return(
     <div>
-      <Navbar user={user} auth={auth}/> 
+      <Navbar user={user} auth={auth}/>
       <Feed/>
     </div>
   )

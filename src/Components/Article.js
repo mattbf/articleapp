@@ -138,7 +138,7 @@ function Article(props) {
         // fetch.error.statuscode == 401 ?
         fetch.error.code == 401 ?
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginLeft: 'auto', marginRight: 'auto', minHeight: '400px'}}>
-          <Heading marginBottom={10} size={700}>Oops.. Looks like you're not logged in!</Heading>
+          <Heading marginBottom={10} size={700}>"Oops.. Looks like you're not logged in!"</Heading>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
             <Link to={'/login'}>
               <Heading size={500} marginRight={5}>Login</Heading>
