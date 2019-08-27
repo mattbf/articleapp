@@ -26,10 +26,66 @@ import {
 //import { Pane as SectionLink } from 'evergreen-ui'
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
+
+const exampleJson = {
+    "blocks": [
+        {
+            "key": "8i090",
+            "text": "Hello CodePulse!",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [
+                {
+                    "offset": 0,
+                    "length": 16,
+                    "style": "BOLD"
+                }
+            ],
+            "entityRanges": [],
+            "data": {}
+        },
+        {
+            "key": "42ncd",
+            "text": "This text should be underlined.",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [
+                {
+                    "offset": 0,
+                    "length": 31,
+                    "style": "UNDERLINE"
+                }
+            ],
+            "entityRanges": [],
+            "data": {}
+        },
+        {
+            "key": "327r6",
+            "text": "And this text should be italic.",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [
+                {
+                    "offset": 0,
+                    "length": 31,
+                    "style": "ITALIC"
+                }
+            ],
+            "entityRanges": [],
+            "data": {}
+        }
+    ],
+    "entityMap": {}
+}
+
 function Article(props) {
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
   const url = `http://localhost:4000/articles/${slug}`
+
+  //convert json obj to draftjs readable
+  const contentState = convertFromRaw(exampleJson);
+  const editorState = EditorState.createWithContent(contentState);
 
   //const id = props.id
   const [fetch, setFetch] = useState({
@@ -133,6 +189,7 @@ function Article(props) {
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
               <Text>{article.data.body}</Text>
+              <Editor editorState={editorState} readOnly={true} />
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
