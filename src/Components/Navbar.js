@@ -22,7 +22,8 @@ const logoBlock = {
 }
 
 const lightText = {
-  color: '#FFFFFF'
+  color: '#FFFFFF',
+  margin: '0px'
 }
 
 const menuText = {
@@ -104,20 +105,17 @@ function Navbar(props) {
           <BackButton is={Link} to="/"/>
           :
           <Pane flex={1} alignItems="center" display="flex">
-            <Link to='/' style={{marginRight: '12px', textDecoration: 'none'}}>
-              <Heading size={600} style={lightText}>Articles</Heading>
-            </Link>
-            <Link to='/' style={{marginRight: '6px', textDecoration: 'none'}}>
-              <Text size={300} style={lightText}>Home</Text>
-            </Link>
-            <Link to='/testing' style={{marginRight: '6px', textDecoration: 'none'}}>
-              <Text size={300} style={lightText}>Test</Text>
-            </Link>
+            <div>
+              <Link to='/' style={{marginRight: '12px', margin: '0px', textDecoration: 'none'}}>
+                <Heading size={700} style={lightText}>AOTD</Heading>
+                <Heading size={200} style={lightText}>Article Of The Day</Heading>
+              </Link>
+            </div>
+
           </Pane>
         }
         </Pane>
-        <Pane>
-          {/* Below you can see the marginRight property on a Button. */}
+        <Pane marginTop="5px">
            {auth ?
              <div>
                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
@@ -129,8 +127,6 @@ function Navbar(props) {
               <Button is={Link} to="/signup" appearance="primary">Sign Up</Button>
             </div>
           }
-
-
         </Pane>
       </Pane>
     </div>
@@ -138,3 +134,9 @@ function Navbar(props) {
 }
 
 export default withRouter(Navbar)
+
+
+//Add links to nav with
+// <Link to='/' style={{marginRight: '6px', marginLeft: '6px', textDecoration: 'none'}}>
+//   <Text size={300} style={lightText}>Articles</Text>
+// </Link>
