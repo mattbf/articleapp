@@ -37,10 +37,7 @@ const centerBlockBlank = {
 
 
 function App() {
-  // const [user, setUser] = useState({
-  //   user: {},
-  //   isAuth: false
-  // })
+  const [globalState, globalActions] = useGlobal();
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
@@ -87,7 +84,6 @@ function App() {
 //console.log(initialState)
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const [globalState, globalActions] = useGlobal();
   return (
     <Route
       {...rest}
@@ -107,7 +103,6 @@ function PrivateRoute({ component: Component, ...rest }) {
   );
 }
 
-const [globalState, globalActions] = useGlobal();
 const exampleuserobj = {
   username: "Matthew",
   createdAt: new Date(),
