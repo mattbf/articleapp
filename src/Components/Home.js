@@ -29,7 +29,7 @@ function Home() {
     axios.get('http://localhost:4000/user/auth', { useCredentails: true })
       .then(response => {
         //setUser(response.data);
-        globalActions.setUser(response.data.user)//check this
+        globalActions.setUser(response.data)//check this
         globalActions.LogInOut(true)
         console.log(response)
         setFetch({

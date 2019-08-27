@@ -56,7 +56,7 @@ function Login(props) {
       withCredentials: true
     })
         .then(response => {
-            globalActions.setUser(response.data.user)//check this
+            globalActions.setUser(response.data)//check this
             setFetch({
               isLoading: false,
               isError: false,

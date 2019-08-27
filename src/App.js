@@ -14,9 +14,8 @@ import Admin from './Components/Admin/Admin'
 
 import axios from 'axios'
 
-import { SimpleStateProvider } from 'use-simple-state';
 import useGlobal from './GlobalState/Store/Store';
-//import { StateProvider } from './GlobalState.js';
+
 
 const centerBlock = {
   marginLeft: 'auto',
@@ -38,10 +37,10 @@ const centerBlockBlank = {
 
 
 function App() {
-  const [user, setUser] = useState({
-    user: {},
-    isAuth: false
-  })
+  // const [user, setUser] = useState({
+  //   user: {},
+  //   isAuth: false
+  // })
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
@@ -52,11 +51,9 @@ function App() {
   useEffect(() => {
     axios.get('http://localhost:4000/user/auth')
       .then(response => {
-        setUser({
-          user: response.data,
-          isAuth: true
-        });
-        //console.log(response)
+        globalActions.setUser(response.data)
+        globalActions.LogInOut(true)
+        console.log(response.data)
         setFetch({
           isLoading: false,
           isError: false,
@@ -64,10 +61,7 @@ function App() {
         })
       })
       .catch(function(error) {
-        setUser({
-          user: {},
-          isAuth: false
-        });
+        globalActions.LogInOut(false)
         setFetch({
           isLoading: false,
           isError: true,
@@ -138,7 +132,7 @@ const exampleuserobj = {
         <p>
           Authorized?
           {globalState.isAuth.toString()}
-          {globalState.user.username}
+
         </p>
         <button type="button" onClick={() => globalActions.LogInOut(true)}>
           Log in
@@ -156,3 +150,5 @@ const exampleuserobj = {
 }
 
 export default App;
+
+//{globalState.user.username}
