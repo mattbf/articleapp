@@ -29,9 +29,13 @@ function Login(props) {
     email: '',
     password: ''
   })
-  const from = props.location.state.from
-  console.log(location)
-  console.log(from)
+  const from = props.location.state ? props.location.state.from : { pathname: '/'}
+  const home = '/'
+  const goBackHome = from.pathanme === home ? true : false
+  //console.log(location.pathname)
+  console.log(home)
+  console.log(from.pathname)
+  console.log(goBackHome)
 
   const updateField = (e) => {
     setLogin({...login, [e.target.name]: e.target.value})
@@ -81,11 +85,7 @@ function Login(props) {
         })
   }
   if (fetch.isAuth) {
-    if (location.pathname != from.pathname) {
-      console.log("go back to ref page") //browserHistory.push(location.state.nextPathname)
-    } else {
-      //browserHistory.push('/')
-    }
+    browserHistory.push(from.pathname)
   }
 
   return(
