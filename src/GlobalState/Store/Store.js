@@ -5,7 +5,8 @@ import * as actions from "../Actions/";
 
 const initialState = {
   counter: 0,
-  counterTwo: 0
+  counterTwo: 0,
+  isAuth: false
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

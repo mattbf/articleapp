@@ -131,16 +131,14 @@ const [globalState, globalActions] = useGlobal();
         </div>
         <div>
         <p>
-          counter:
-          {globalState.counter}
-          counterTwo
-          {globalState.counterTwo}
+          Authorized?
+          {globalState.isAuth.toString()}
         </p>
-        <button type="button" onClick={() => globalActions.addToCounter(1)}>
-          +1 to global
+        <button type="button" onClick={() => globalActions.LogInOut(true)}>
+          Log in
         </button>
-        <button type="button" onClick={() => globalActions.addToCounterTwo(1)}>
-          +1 to global TWO
+        <button type="button" onClick={() => globalActions.LogInOut(false)}>
+          Logout
         </button>
       </div>
       </Router>
