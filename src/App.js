@@ -133,9 +133,14 @@ const [globalState, globalActions] = useGlobal();
         <p>
           counter:
           {globalState.counter}
+          counterTwo
+          {globalState.counterTwo}
         </p>
         <button type="button" onClick={() => globalActions.addToCounter(1)}>
           +1 to global
+        </button>
+        <button type="button" onClick={() => globalActions.addToCounterTwo(1)}>
+          +1 to global TWO
         </button>
       </div>
       </Router>
