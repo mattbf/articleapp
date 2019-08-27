@@ -46,8 +46,9 @@ function Article(props) {
     commentsCount: 0
   })
 
-  const contentState = convertFromRaw(content);
-  const [editorState, setEditorState] = useState(contentState);
+  const [editorState, setEditorState] = React.useState(
+    EditorState.createEmpty()
+  );
   const onChangeEditor = (editorState) => {
     setEditorState(editorState)
   }
@@ -75,6 +76,7 @@ function Article(props) {
               isError: false,
               error: null
             })
+            setEditorState(response.data.body[0])
 
             console.log(response.data)
         })
@@ -92,30 +94,6 @@ function Article(props) {
         })
   }, [])
 
-  //convert json obj to draftjs readable
-  //console.log(article.data.length != 0 ? "true" : "fasle")
-  // const sampleMarkup =
-  // '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
-  // '<a href="http://www.facebook.com">Example link</a>';
-  //
-  // if (article.data.length != 0) {
-  //   // console.log(article.data)
-  //   // console.log(exampleJson)
-  //   // const content = convertFromRaw(article.data)
-  //   const blocksFromHTML = convertFromHTML(sampleMarkup)
-  //   console.log(blocksFromHTML)
-  //   const newState = ContentState.createFromBlockArray(
-  //     blocksFromHTML.blockMap,
-  //     blocksFromHTML.entityMap
-  //   );
-  //   const editorState = EditorState.createWithContent(newState);
-  //   // console.log('Converted: ' + editorState)
-  // }
-
-  // console.log("from db: ")
-  // console.log(article.data)
-  // console.log("example json: ")
-  // console.log(exampleJson)
 
 
   return(
@@ -166,7 +144,7 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-              <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
+              <ArticleEditor readOnly={true} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >

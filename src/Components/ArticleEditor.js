@@ -20,6 +20,8 @@ function ArticleEditor(props) {
   //     editorState,
   //   });
   // }
+  console.log(props.initialContent)
+  console.log(content)
     return (
       <div>
       <Editor
@@ -29,7 +31,7 @@ function ArticleEditor(props) {
         onEditorStateChange={props.onChange}
         readOnly={props.readOnly}
         toolbarHidden={props.readOnly}
-        contentState={content}
+        contentState={props.initialContent}
 
       />
       <textarea

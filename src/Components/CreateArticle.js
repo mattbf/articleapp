@@ -114,6 +114,7 @@ function CreateArticle() {
     setArticleInfo(content)
     console.log(articleInfo)
   }
+  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   return(
     <div>
       <CreateNav publish={Publish}/>
@@ -143,7 +144,7 @@ function CreateArticle() {
             <div>
               {!fetch.isLoading ?
                 <Pane elevation={1} style={paper} padding={24}>
-                  <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
+                  <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
                 </Pane>
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
