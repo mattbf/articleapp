@@ -23,11 +23,11 @@ function ArticleBlock(props) {
   const commentsCount = props.article.comments.length
   return(
       <Pane display="flex" padding={16} background="#FFFFFF" borderRadius={3} margin={10} position='relative'>
-        <Pane flex={1} alignItems="top" display="flex">
-          <Pane>
-            <Pane flex={1} alignItems="top" display="flex" flexDirection='row'>
+        <div style={{display: 'flex', flexDirection: 'row',}}>
+            <div>
               <Pill display="inline-flex" color="blue" marginTop={5} marginRight={8}>{props.number}</Pill>
-            <Pane flex={1} alignItems="center" display="flex" flexDirection='column'>
+            </div>
+            <div>
               <Link
                 to={{
                   pathname: `/article/${url}`,
@@ -37,22 +37,16 @@ function ArticleBlock(props) {
               >
                 <Heading style={articleLink} size={600} >{props.article.title}</Heading>
               </Link>
-              <Pane flex={1} alignItems="center" display="flex">
+              <div flex={1} alignItems="center" display="flex">
                 <Text size={300} marginRight={3}>Posted by </Text>
                 <Link to={authorLink} style={{marginTop: '-4px'}}>
                   <Text size={300} marginRight={3}>{props.article.author}</Text>
                 </Link>
                 <Text size={300} marginRight={3}> | </Text>
                 <Text size={300}>  {timeago} | {commentsCount} comments</Text>
-              </Pane>
-            </Pane>
-            </Pane>
-
-          </Pane>
-        </Pane>
-        <Pane>
-          {/* Below you can see the marginRight property on a Button. */}
-        </Pane>
+              </div>
+            </div>
+        </div>
       </Pane>
   )
 }
