@@ -3,7 +3,7 @@ import Feed from './Feed'
 import Navbar from './Navbar'
 import { Link } from "react-router-dom";
 import axios from 'axios'
-import useGlobal from './GlobalState/Store/Store';
+import useGlobal from '../GlobalState/Store/Store';
 import {
   Pane,
   Button,
