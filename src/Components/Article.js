@@ -47,9 +47,9 @@ function Article(props) {
   })
 
   const contentState = convertFromRaw(content);
-  const [editorState, setEditorState] = useState(content);
+  const [editorState, setEditorState] = useState(contentState);
   const onChangeEditor = (editorState) => {
-    //setEditorState(editorState)
+    setEditorState(editorState)
   }
 
   useEffect(() => {

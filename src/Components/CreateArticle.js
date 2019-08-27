@@ -70,7 +70,7 @@ function CreateArticle() {
     setEditorState(editorState)
   }
 
-  function Publish() {
+  function Publish(articleContent) {
     setFetch({
       isLoading: true,
       isError: false,
@@ -83,7 +83,7 @@ function CreateArticle() {
       data:{
       	title: title,
       	author: "Not an author",
-      	body: articleInfo,
+      	body: articleContent,
       	slug: title ? PrettyUrl(title) : ''
       }
     })
@@ -142,7 +142,7 @@ function CreateArticle() {
 
             <div>
               {!fetch.isLoading ?
-                <Pane elevation={1} style={paper}>
+                <Pane elevation={1} style={paper} padding={24}>
                   <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
                 </Pane>
                 :
