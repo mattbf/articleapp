@@ -79,10 +79,11 @@ function UserMenu(props) {
 function Navbar(props) {
   const [globalState, globalActions] = useGlobal();
   const auth = globalState.isAuth
+  const user = globalState.user
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-  const user = props.user
+
   //const location = props.location
   const browserHistory = props.history
   function LogoutUser() {

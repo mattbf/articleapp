@@ -113,6 +113,10 @@ function PrivateRoute({ component: Component, ...rest }) {
 }
 
 const [globalState, globalActions] = useGlobal();
+const exampleuserobj = {
+  username: "Matthew",
+  createdAt: new Date(),
+}
   return (
 
       <Router>
@@ -133,12 +137,16 @@ const [globalState, globalActions] = useGlobal();
         <p>
           Authorized?
           {globalState.isAuth.toString()}
+          {globalState.user.username}
         </p>
         <button type="button" onClick={() => globalActions.LogInOut(true)}>
           Log in
         </button>
         <button type="button" onClick={() => globalActions.LogInOut(false)}>
           Logout
+        </button>
+        <button type="button" onClick={() => globalActions.setUser(exampleuserobj)}>
+          Set User
         </button>
       </div>
       </Router>
