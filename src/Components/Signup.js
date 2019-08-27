@@ -94,7 +94,7 @@ function Signup() {
           {fetch.isLoading ?
             <Spinner size={16} style={{color: '#FFFFFF'}}/>
             :
-            "Login"
+            "Sign up"
           }
         </Button>
         {fetch.isError ?

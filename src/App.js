@@ -15,6 +15,7 @@ import Admin from './Components/Admin/Admin'
 import axios from 'axios'
 
 import { SimpleStateProvider } from 'use-simple-state';
+import useGlobalHook from 'use-global-hook';
 //import { StateProvider } from './GlobalState.js';
 
 const centerBlock = {
@@ -35,6 +36,19 @@ const centerBlockBlank = {
 
 //const fakeAuth = true
 
+//From use global hook
+const initialState = {
+  counter: 0,
+};
+
+const actions = {
+  addToCounter: (store, amount) => {
+    const newCounterValue = store.state.counter + amount;
+    store.setState({ counter: newCounterValue });
+  },
+};
+
+const useGlobal = useGlobalHook(React, initialState, actions);
 
 function App() {
   const [user, setUser] = useState({
@@ -111,6 +125,7 @@ function PrivateRoute({ component: Component, ...rest }) {
   );
 }
 
+const [globalState, globalActions] = useGlobal();
   return (
 
       <Router>
@@ -127,6 +142,15 @@ function PrivateRoute({ component: Component, ...rest }) {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup}/>
         </div>
+        <div>
+        <p>
+          counter:
+          {globalState.counter}
+        </p>
+        <button type="button" onClick={() => globalActions.addToCounter(1)}>
+          +1 to global
+        </button>
+      </div>
       </Router>
 
   );

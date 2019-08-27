@@ -112,7 +112,7 @@ function Login(props) {
           null
         }
         <Pane flex={1} alignItems="center" display="flex" marginTop={15}>
-          <Text size={300}>Don't have an account?</Text>
+          <Text size={300}>"Dont' have an account?"</Text>
           <Link to='/signup' style={{marginTop: '-4px', marginLeft: '4px'}}>
             <Text size={300} marginRight={3}>Sign up here</Text>
           </Link>
