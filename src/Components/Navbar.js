@@ -123,7 +123,10 @@ function Navbar(props) {
                <UserMenu user={user} logout={LogoutUser}/>
               </div>
             :
-            <Button is={Link} to="/login" appearance="primary">Login</Button>
+            <div>
+              <Button is={Link} to="/login" appearance="minimal" marginRight="10px">Login</Button>
+              <Button is={Link} to="/signup" appearance="primary">Sign Up</Button>
+            </div>
           }
 
 
