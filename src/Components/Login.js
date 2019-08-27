@@ -33,9 +33,9 @@ function Login(props) {
   const home = '/'
   const goBackHome = from.pathanme === home ? true : false
   //console.log(location.pathname)
-  console.log(home)
-  console.log(from.pathname)
-  console.log(goBackHome)
+  // console.log(home)
+  // console.log(from.pathname)
+  // console.log(goBackHome)
 
   const updateField = (e) => {
     setLogin({...login, [e.target.name]: e.target.value})

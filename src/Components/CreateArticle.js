@@ -10,6 +10,8 @@ import { Route, Redirect } from 'react-router'
 import {PrettyUrl} from '../Utils/PrettyUrl'
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
+import { convertToRaw } from "draft-js";
+
 
 import {
   Pane,
@@ -46,22 +48,24 @@ const TitleBox = {
   alignItems: 'center'
 }
 
-const isLoading = false
-
 
 function CreateArticle() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
-  
+
   const [title, setTitle] = useState(' ')
-  const [articleInfo, setArticleInfo] = useState('')
+  const [articleInfo, setArticleInfo] = useState({})
   const [isSuccess, setIsSuccess] = useState(false)
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
     error: null
   })
+  // const [editorState, setEditorState] = React.useState(
+  //   EditorState.createEmpty()
+  // );
+
 
   function Publish() {
     setFetch({
@@ -98,6 +102,11 @@ function CreateArticle() {
         console.log(error);
       })
   }
+  // function onEdit(content) {
+  //   const contentState = content.getCurrentContent()
+  //   setArticleInfo(convertToRaw(contentState))
+  //   console.log(articleInfo)
+  // }
   function onEdit(content) {
     setArticleInfo(content)
     console.log(articleInfo)
@@ -131,7 +140,7 @@ function CreateArticle() {
             <div>
               {!fetch.isLoading ?
                 <Pane elevation={1} style={paper}>
-                  <ArticleEditor onEdit={onEdit}/>
+                  <ArticleEditor/>
                 </Pane>
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>
@@ -142,7 +151,6 @@ function CreateArticle() {
           </div>
           )
         )}/>
-
       </div>
     </div>
   )

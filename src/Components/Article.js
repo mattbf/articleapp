@@ -77,16 +77,31 @@ const exampleJson = {
     ],
     "entityMap": {}
 }
+const loadingJson = {
+    "blocks": [
+        {
+            "key": "0000",
+            "text": "Loading Article",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [
+                {
+                    "offset": 0,
+                    "length": 16,
+                    "style": "BOLD"
+                }
+            ],
+            "entityRanges": [],
+            "data": {}
+        },
+    ],
+    "entityMap": {}
+}
 
 function Article(props) {
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
   const url = `http://localhost:4000/articles/${slug}`
-
-  //convert json obj to draftjs readable
-  const contentState = convertFromRaw(exampleJson);
-  const editorState = EditorState.createWithContent(contentState);
-
   //const id = props.id
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -98,6 +113,7 @@ function Article(props) {
     timeago: '',
     commentsCount: 0
   })
+  //const editorState = EditorState.createWithContent(loadingJson);
   useEffect(() => {
     setFetch({
       isLoading: true,
@@ -108,6 +124,9 @@ function Article(props) {
     console.log(url)
     axios.get(url)
         .then(response => {
+            // console.log("fetched article")
+            console.log(response.data)
+
             setArticle({
               data: response.data,
               timeago: timeDifferenceForDate(response.data.createdAt),
@@ -118,6 +137,7 @@ function Article(props) {
               isError: false,
               error: null
             })
+
             console.log(response.data)
         })
         .catch(function (error){
@@ -134,11 +154,31 @@ function Article(props) {
         })
   }, [])
 
+  //convert json obj to draftjs readable
+  //console.log(article.data.length != 0 ? "true" : "fasle")
+  const sampleMarkup =
+  '<b>Bold text</b>, <i>Italic text</i><br/ ><br />' +
+  '<a href="http://www.facebook.com">Example link</a>';
 
-  function ShowData() {
-    console.log(article)
-    //console.log(url)
+  if (article.data.length != 0) {
+    // console.log(article.data)
+    // console.log(exampleJson)
+    // const content = convertFromRaw(article.data)
+    const blocksFromHTML = convertFromHTML(sampleMarkup)
+    console.log(blocksFromHTML)
+    const newState = ContentState.createFromBlockArray(
+      blocksFromHTML.blockMap,
+      blocksFromHTML.entityMap
+    );
+    const editorState = EditorState.createWithContent(newState);
+    // console.log('Converted: ' + editorState)
   }
+
+  // console.log("from db: ")
+  // console.log(article.data)
+  // console.log("example json: ")
+  // console.log(exampleJson)
+
 
   return(
 
@@ -188,8 +228,8 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-              <Text>{article.data.body}</Text>
-              <Editor editorState={editorState} readOnly={true} />
+
+              "Article"
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
@@ -202,9 +242,13 @@ function Article(props) {
           </Pane>
         </div>
       }
-      <Button onClick={ShowData}> Show data </Button>
     </div>
   )
 }
 
 export default Article
+
+//{article.data}
+// <Text>{article.data.body}</Text>
+
+// <Editor editorState={editorState} readOnly={true} />
