@@ -25,7 +25,7 @@ function Admin() {
   })
 
   useEffect(() => {
-    axios.get('localhost:4000/admin/')
+    axios.get('localhost:4000/admin/', {withCredentials: true})
       .then(response => {
         // setUserData(response.data.users);
         // setAllArticles(response.data.articles);
