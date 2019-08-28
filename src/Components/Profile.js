@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import useGlobal from '../GlobalState/Store/Store';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
 import StatBox from './StatBox'
+import axios from 'axios'
 
 import {
   Pane,
@@ -12,19 +13,21 @@ import {
   Heading,
   Avatar,
   TextInput,
-  IconButton
+  IconButton,
+  Spinner,
+  Textarea
 } from 'evergreen-ui'
 
-const stats = [
-  {
-    label: "Articles",
-    value: 102
-  },
-  {
-    label: "Comments",
-    value: 17
-  },
-]
+// const stats = [
+//   {
+//     label: "Articles",
+//     value: 102
+//   },
+//   {
+//     label: "Comments",
+//     value: 17
+//   },
+// ]
 
 const StatsArray = {
   display: 'flex',
@@ -79,37 +82,120 @@ function Profile(props) {
   const profileUser = props.match.params.username
   console.log(props.match.params.username)
   console.log(user.username)
+  const url = `http://localhost:4000/user/${profileUser}`
+
+  //For editing bio
+  const [bio, setBio] = useState("")
+  const [edit, setEdit] = useState(false)
+
+  const [stats, setStats] = useState([])
+  const [profile, setProfile] = useState({
+    user: {},
+    articles: [],
+    articleCount: '',
+    commentsCount: ''
+  })
+  const [fetch, setFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
+
+  useEffect(() => {
+    setFetch({
+      isLoading: true,
+      isError: false,
+      error: null
+    })
+
+    console.log(url)
+    axios.get(url)
+        .then(response => {
+            setProfile({
+              user: response.data.profile,
+              articles: response.data.articles,
+              articleCount: response.data.articles.length,
+              commentsCount: response.data.comments
+            });
+            setStats([
+              {
+                label: "Articles",
+                value: response.data.articles.length,
+              },
+              {
+                label: "Comments",
+                value: response.data.comments,
+              },
+            ])
+            setBio(response.data.profile.bio)
+            setFetch({
+              isLoading: false,
+              isError: false,
+              error: null
+            })
+        })
+        .catch(function (error){
+          setFetch({
+            isLoading: false,
+            isError: true,
+            error: {
+              error: error,
+              code: error.message.substring(error.message.length - 3, error.message.length)
+            }
+          })
+            console.log(error);
+
+        })
+  }, [])
 
   const isCurrentUser = profileUser === user.username ? true : false
-
+  var dateoptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const joinedDate = profile.user.createdAt ? new Date(profile.user.createdAt).toLocaleDateString("en-US", dateoptions) : ""
+  console.log(joinedDate)
   return(
     <div>
       <Navbar/>
       <div style={Editbutton}>
         {isCurrentUser ? <IconButton appearance="minimal" icon="edit" /> : null}
       </div>
-      <div style={TopProfile}>
-        <div style={ProfileBox}>
-          <div style={UserBox}>
-            <Avatar name="Jeroen Ransijn" size={60} />
-            <div style={UserInfoBox}>
-              <Heading size={600}> Landon </Heading>
-              <Heading size={300}> Joined: </Heading>
-            </div>
-            <div style={StatsArray}>
-              {stats.map((stat, index) =>
-                <StatBox index={index} value={stat.value} label={stat.label}/>
-              )}
+      {fetch.isLoading ?
+        <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
+          <Spinner />
+        </Pane>
+        :
+        fetch.isError ?
+          <div>error</div>
+          :
+          <div style={TopProfile}>
+            <div style={ProfileBox}>
+              <div style={UserBox}>
+                <Avatar name={profile.user.username} size={60} />
+                <div style={UserInfoBox}>
+                  <Heading size={600}> {profile.user.username} </Heading>
+                  <Heading size={300}> Joined: {joinedDate} </Heading>
+                </div>
+                <div style={StatsArray}>
+                  {stats.map((stat, index) =>
+                    <StatBox index={index} value={stat.value} label={stat.label}/>
+                  )}
+                </div>
+              </div>
+              <div style={biotext}>
+                {edit ?
+                  <Textarea
+                    onChange={e => setBio( e.target.value )}
+                    value={bio}
+                  />
+                  :
+                  <Text size={500}>
+                    {profile.user.bio}
+                  </Text>
+                }
+              </div>
             </div>
           </div>
-          <div style={biotext}>
-            <Text size={500} > Bio... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            </Text>
-          </div>
+      }
 
-        </div>
-
-      </div>
 
     </div>
   )

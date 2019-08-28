@@ -11,6 +11,8 @@ import CreateArticle from './Components/CreateArticle'
 import Profile from './Components/Profile'
 import Todo from './Components/Todo'
 import Admin from './Components/Admin/Admin'
+import MediaQuery from 'react-responsive';
+import { useMediaQuery } from 'react-responsive'
 
 import axios from 'axios'
 
@@ -34,9 +36,44 @@ const centerBlockBlank = {
 }
 
 //const fakeAuth = true
+const Example = () => (
+  <div>
+    <div>Device Test!</div>
+    <MediaQuery minDeviceWidth={1224}>
+      <div>You are a desktop or laptop</div>
+      <MediaQuery minDeviceWidth={1824}>
+        <div>You also have a huge screen</div>
+      </MediaQuery>
+      <MediaQuery maxWidth={1224}>
+        <div>You are sized like a tablet or mobile phone though</div>
+      </MediaQuery>
+    </MediaQuery>
+    <MediaQuery maxDeviceWidth={700}>
+      <div>700 query</div>
+    </MediaQuery>
+    <MediaQuery maxDeviceWidth={1224}>
+      <div>You are a tablet or mobile phone</div>
+    </MediaQuery>
+    <MediaQuery orientation="portrait">
+      <div>You are portrait</div>
+    </MediaQuery>
+    <MediaQuery orientation="landscape">
+      <div>You are landscape</div>
+    </MediaQuery>
+    <MediaQuery minResolution="2dppx">
+      <div>You are retina</div>
+    </MediaQuery>
+  </div>
+);
+// const Mobile = ({ children }) => {
+//   const isMobile = useMediaQuery({ maxWidth: 767 })
+//   return isMobile //? children : null
+// }
 
 
 function App() {
+  //const isMobile = useMediaQuery({ maxWidth: 767 })
+  
   const [globalState, globalActions] = useGlobal();
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -83,6 +120,7 @@ function App() {
 // }
 //console.log(initialState)
 
+
 function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
@@ -123,22 +161,8 @@ const exampleuserobj = {
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup}/>
         </div>
-        <div>
-        <p>
-          Authorized?
-          {globalState.isAuth.toString()}
-
-        </p>
-        <button type="button" onClick={() => globalActions.LogInOut(true)}>
-          Log in
-        </button>
-        <button type="button" onClick={() => globalActions.LogInOut(false)}>
-          Logout
-        </button>
-        <button type="button" onClick={() => globalActions.setUser(exampleuserobj)}>
-          Set User
-        </button>
-      </div>
+        <div> is Mobile?  </div>
+        <Example/>
       </Router>
 
   );

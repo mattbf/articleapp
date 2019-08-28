@@ -39,6 +39,7 @@ const menuText = {
 function UserMenu(props) {
 
   const user = props.user
+  const authorLink = `/author/${user.username}`
   const LogoutUser = props.logout
   return(
     <Popover
@@ -46,7 +47,7 @@ function UserMenu(props) {
       content={
         <Menu>
           <Menu.Group>
-            <Link to='/author/Landon' style={menuText}>
+            <Link to={authorLink} style={menuText}>
               <Menu.Item>
                 Profile
               </Menu.Item>

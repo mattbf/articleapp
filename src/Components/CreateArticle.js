@@ -55,7 +55,7 @@ function CreateArticle() {
   const user = globalState.user
   const auth = globalState.isAuth
 
-  const [title, setTitle] = useState(' ')
+  const [title, setTitle] = useState('')
   const [articleInfo, setArticleInfo] = useState({})
   const [isSuccess, setIsSuccess] = useState(false)
   const [fetch, setFetch] = useState({
