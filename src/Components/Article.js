@@ -9,8 +9,8 @@ import { PrettyUrl } from '../Utils/PrettyUrl.js';
 
 import { convertFromHTML, convertToHTML } from "draft-convert"
 
-import ArticleEditor from './ArticleEditor.js';
 import ArticleViewer from './ArticleViewer.js';
+import CommentsEditor from './CommentsEditor.js';
 import htmlToDraft from 'html-to-draftjs';
 
 import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
@@ -44,6 +44,7 @@ function Article(props) {
     commentsCount: 0
   })
 
+  //For artitcle
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
@@ -51,6 +52,18 @@ function Article(props) {
   const onChangeEditor = (editorState) => {
     setEditorState(editorState)
   }
+
+  //for comments
+  const [commentsEditorState, setCommentsEditorState] = React.useState(
+    EditorState.createEmpty()
+  );
+  const onChangeCommentsEditor = (commentsEditorState) => {
+    setCommentsEditorState(commentsEditorState)
+  }
+
+  const rawCommentContentState = convertToRaw(
+    commentsEditorState.getCurrentContent()
+  );
 
   useEffect(() => {
     setFetch({
@@ -145,16 +158,17 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-              <ArticleViewer readOnly={false} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
+              <ArticleViewer readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
             <Heading size={700} marginBottom={20} >Comments</Heading>
             {article.commentsCount == 0 ?
-              <div> No Comments yet</div>
+              <div style={{marginBottom: '20px'}}> No Comments yet</div>
               :
               <Comments comments={article.data.comments} />
             }
+            <CommentsEditor readOnly={false} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
           </Pane>
         </div>
       }

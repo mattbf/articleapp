@@ -63,6 +63,7 @@ function CreateArticle() {
     isError: false,
     error: null
   })
+  //For aritlle
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
@@ -73,6 +74,7 @@ function CreateArticle() {
   const rawContentState = convertToRaw(
   editorState.getCurrentContent()
   );
+  
 
 
   function Publish() {
