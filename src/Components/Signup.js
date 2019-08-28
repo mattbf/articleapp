@@ -64,7 +64,7 @@ function Signup(props) {
         })
   }
   if (fetch.isAuth) {
-    browserHistory.push('/')
+    browserHistory.push(`/author/${login.username}`)
     //setTimeout(()=> browserHistory.push('/'), 1000);
   }
   return(

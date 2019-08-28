@@ -90,11 +90,10 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  // const [globalState, globalActions] = useGlobal();
-  // const auth = globalState.isAuth
-  // const user = globalState.user
-  const user = props.user
-  const auth = props.auth
+  const [globalState, globalActions] = useGlobal();
+  const auth = globalState.isAuth
+  const user = globalState.user
+  
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false

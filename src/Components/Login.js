@@ -136,25 +136,6 @@ function Login(props) {
           </Link>
         </Pane>
       </Pane>
-      <Link to='/'>
-        Home
-      </Link>
-      <Button
-        width='100%'
-        appearance="primary"
-        style={{display: 'flex', justifyContent: 'center'}}
-        onClick={DisplayProps}
-      >
-        props
-      </Button>
-      <Button
-        width='100%'
-        appearance="primary"
-        style={{display: 'flex', justifyContent: 'center'}}
-        onClick={backtoprev}
-      >
-        goBack
-      </Button>
     </div>
   )
 }

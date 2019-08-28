@@ -19,6 +19,21 @@ function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
+  useEffect(() => {
+    if (!user.username) {
+      //console.log("user not set")
+      //window.location.reload();
+      console.log("user not set")
+      setTimeout(function(){
+        if (!user.username) {
+          //window.location.reload();
+        } else {
+          console.log("user is now set")
+        }
+      }, 3000)
+    }
+  }, [])
+
   //const [user, setUser] = useState({})
   // const [fetch, setFetch] = useState({
   //   isLoading: false,
