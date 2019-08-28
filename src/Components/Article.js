@@ -55,6 +55,7 @@ function Article(props) {
     timeago: '',
     commentsCount: 0
   })
+  const [refresh, setRefresh] = useState(1)
 
   //For artitcle
   const [editorState, setEditorState] = React.useState(
@@ -110,6 +111,7 @@ function Article(props) {
               EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
             )
 
+
             //console.log(response.data.body)
         })
         .catch(function (error){
@@ -124,7 +126,7 @@ function Article(props) {
             console.log(error);
 
         })
-  }, [])
+  }, [refresh])
 
   function PostComment() {
     setCommentFetch({
@@ -150,6 +152,7 @@ function Article(props) {
           commentSet: true,
           error: null
         })
+        setRefresh(refresh + 1)
       })
       .catch(function(error) {
         setCommentFetch({
