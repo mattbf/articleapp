@@ -79,11 +79,11 @@ function Article(props) {
               isError: false,
               error: null
             })
-            // setEditorState(
-            //   EditorState.createWithContent(convertFromRaw(response.data))
-            // )
+            setEditorState(
+              EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
+            )
 
-            console.log(response.data.body[0])
+            console.log(response.data.body)
         })
         .catch(function (error){
           setFetch({
