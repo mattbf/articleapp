@@ -44,6 +44,11 @@ function Article(props) {
     isError: false,
     error: null
   })
+  const [commentFetch, setCommentFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
   const [article, setArticle] = useState({
     data: [],
     timeago: '',
@@ -114,41 +119,38 @@ function Article(props) {
         })
   }, [])
 
-  // function PostComment() {
-  //   setFetch({
-  //     isLoading: true,
-  //     isError: false,
-  //     error: null
-  //   })
-  //   axios.post('http://localhost:4000/articles/add')
-  //   axios({
-  //     method: 'post',
-  //     url: 'http://localhost:4000/articles/add',
-  //     data:{
-  //     	title: title,
-  //     	author: user.username,
-  //     	body: JSON.stringify(rawContentState),
-  //     	slug: title ? PrettyUrl(title) : ''
-  //     }
-  //   })
-  //     .then(response => {
-  //       console.log(response)
-  //       setFetch({
-  //         isLoading: false,
-  //         isError: false,
-  //         error: null
-  //       })
-  //       setIsSuccess(true)
-  //     })
-  //     .catch(function(error) {
-  //       setFetch({
-  //         isLoading: false,
-  //         isError: true,
-  //         error: error
-  //       })
-  //       console.log(error);
-  //     })
-  // }
+  function PostComment() {
+    setCommentFetch({
+      isLoading: true,
+      isError: false,
+      error: null
+    })
+    const commenturl = `http://localhost:4000/articles/${slug}/comments`
+    axios({
+      method: 'post',
+      url: commenturl,
+      data:{
+        body: JSON.stringify(rawCommentContentState),
+      	author: user.username,
+      }
+    })
+      .then(response => {
+        console.log(response)
+        setCommentFetch({
+          isLoading: false,
+          isError: false,
+          error: null
+        })
+      })
+      .catch(function(error) {
+        setCommentFetch({
+          isLoading: false,
+          isError: true,
+          error: error
+        })
+        console.log(error);
+      })
+  }
 
 
   return(
@@ -213,7 +215,7 @@ function Article(props) {
               <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
               <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
                 <div style={{marginLeft: 'auto', marginRight: '0px'}}>
-                  <Button marginRight={45} appearance="primary" intent="success">
+                  <Button marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
                     Post Comment
                   </Button>
                 </div>

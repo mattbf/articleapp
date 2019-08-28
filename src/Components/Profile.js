@@ -1,4 +1,5 @@
 import React from 'react';
+import useGlobal from '../GlobalState/Store/Store';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
@@ -71,8 +72,15 @@ const Editbutton = {
   marginTop: '15px',
 }
 
-function Profile() {
-  const isCurrentUser = true
+function Profile(props) {
+  const [globalState, globalActions] = useGlobal();
+  const user = globalState.user
+  const auth = globalState.isAuth
+  const profileUser = props.match.params.username
+  console.log(props.match.params.username)
+  console.log(user.username)
+
+  const isCurrentUser = profileUser === user.username ? true : false
 
   return(
     <div>

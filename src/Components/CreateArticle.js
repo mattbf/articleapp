@@ -74,7 +74,7 @@ function CreateArticle() {
   const rawContentState = convertToRaw(
   editorState.getCurrentContent()
   );
-  
+
 
 
   function Publish() {
@@ -83,7 +83,6 @@ function CreateArticle() {
       isError: false,
       error: null
     })
-    axios.post('http://localhost:4000/articles/add')
     axios({
       method: 'post',
       url: 'http://localhost:4000/articles/add',
