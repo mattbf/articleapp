@@ -222,6 +222,13 @@ function Article(props) {
                 :
                 <Comments comments={article.data.comments} />
               }
+                {commentFetch.isError ?
+                  <div>
+                    <Text color="#EC4C47" size={300}> {commentFetch.error.message}</Text>
+                  </div>
+                  :
+                  null
+                }
                 <div>
                   <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
                   <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
