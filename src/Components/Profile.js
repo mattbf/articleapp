@@ -80,8 +80,8 @@ function Profile(props) {
   const user = globalState.user
   const auth = globalState.isAuth
   const profileUser = props.match.params.username
-  console.log(props.match.params.username)
-  console.log(user.username)
+  // console.log(props.match.params.username)
+  // console.log(user.username)
   const url = `http://localhost:4000/user/${profileUser}`
 
 
@@ -190,7 +190,6 @@ function Profile(props) {
   const isCurrentUser = profileUser === user.username ? true : false
   var dateoptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const joinedDate = profile.user.createdAt ? new Date(profile.user.createdAt).toLocaleDateString("en-US", dateoptions) : ""
-  console.log(joinedDate)
   return(
     <div>
       <Navbar/>

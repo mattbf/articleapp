@@ -20,35 +20,35 @@ function Home() {
   const user = globalState.user
   const auth = globalState.isAuth
   //const [user, setUser] = useState({})
-  const [fetch, setFetch] = useState({
-    isLoading: false,
-    isError: false,
-    error: null
-  })
-  useEffect(() => {
-    if (!user.username) {
-      axios.get('http://localhost:4000/user/auth', { useCredentails: true })
-        .then(response => {
-          //setUser(response.data);
-          globalActions.setUser(response.data)//check this
-          globalActions.LogInOut(true)
-          console.log(response)
-          setFetch({
-            isLoading: false,
-            isError: false,
-            error: null
-          })
-        })
-        .catch(function(error) {
-          setFetch({
-            isLoading: false,
-            isError: true,
-            error: error
-          })
-          console.log(error);
-        })
-    }
-  }, [])
+  // const [fetch, setFetch] = useState({
+  //   isLoading: false,
+  //   isError: false,
+  //   error: null
+  // })
+  // // useEffect(() => {
+  //   if (!user.username) {
+  //     axios.get('http://localhost:4000/user/auth', { useCredentails: true })
+  //       .then(response => {
+  //         //setUser(response.data);
+  //         globalActions.setUser(response.data)//check this
+  //         globalActions.LogInOut(true)
+  //         console.log(response)
+  //         setFetch({
+  //           isLoading: false,
+  //           isError: false,
+  //           error: null
+  //         })
+  //       })
+  //       .catch(function(error) {
+  //         setFetch({
+  //           isLoading: false,
+  //           isError: true,
+  //           error: error
+  //         })
+  //         console.log(error);
+  //       })
+  //   }
+  // }, [])
   // const auth = user.username ? true : false
   return(
     <div>

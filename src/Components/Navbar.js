@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
@@ -37,9 +37,20 @@ const menuText = {
 //className="logoBlock"
 
 function UserMenu(props) {
+  // const [globalState, globalActions] = useGlobal();
+  // const user = globalState.user
+  // const auth = globalState.isAuth
+  // const [user, setUser] = useState({
+  //   username: "username",
+  // })
+  const [authorLink, setAuthorLink] = useState('/')
+  useEffect(() => {
+    setAuthorLink(`/author/${user.username}`)
+  }, [])
 
   const user = props.user
-  const authorLink = `/author/${user.username}`
+  // const authorLink = `/author/${user.username}`
+  console.log(user)
   const LogoutUser = props.logout
   return(
     <Popover
@@ -79,9 +90,11 @@ function UserMenu(props) {
 // </Pane>
 
 function Navbar(props) {
-  const [globalState, globalActions] = useGlobal();
-  const auth = globalState.isAuth
-  const user = globalState.user
+  // const [globalState, globalActions] = useGlobal();
+  // const auth = globalState.isAuth
+  // const user = globalState.user
+  const user = props.user
+  const auth = props.auth
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false

@@ -73,7 +73,7 @@ const Example = () => (
 
 function App() {
   //const isMobile = useMediaQuery({ maxWidth: 767 })
-  
+
   const [globalState, globalActions] = useGlobal();
   const [fetch, setFetch] = useState({
     isLoading: false,
@@ -154,8 +154,8 @@ const exampleuserobj = {
           <Route path="/todos" component={Todo}/>
           <Route path="/author/:username" component={Profile}/>
           <Route path="/article/:title" component={Article}/>
-          <Route path="/new" component={CreateArticle}/>
-          <Route path="/admin" component={Admin}/>
+          <PrivateRoute path="/new" component={CreateArticle}/>
+          <PrivateRoute path="/admin" component={Admin}/>
         </div>
         <div style={centerBlockBlank}>
           <Route path="/login" component={Login} />

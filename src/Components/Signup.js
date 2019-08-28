@@ -20,8 +20,9 @@ const center = {
   marginTop: '25px'
 }
 
-function Signup() {
+function Signup(props) {
   const [globalState, globalActions] = useGlobal();
+  const browserHistory = props.history
   const [login, setLogin] = useState({
     username: '',
     email: '',
@@ -33,7 +34,8 @@ function Signup() {
   const [fetch, setFetch] = useState({
     isLoading: false,
     isError: false,
-    error: null
+    error: null,
+    isAuth: false
   })
   function Signup() {
     axios.post('http://localhost:4000/user/', {
@@ -46,7 +48,8 @@ function Signup() {
             setFetch({
               isLoading: false,
               isError: false,
-              error: null
+              error: null,
+              isAuth: true
             })
             globalActions.LogInOut(true)
         })
@@ -54,10 +57,15 @@ function Signup() {
             setFetch({
               isLoading: false,
               isError: true,
-              error: error
+              error: error,
+              isAuth: false
             })
             console.log(error);
         })
+  }
+  if (fetch.isAuth) {
+    browserHistory.push('/')
+    //setTimeout(()=> browserHistory.push('/'), 1000);
   }
   return(
     <div style={center}>
@@ -94,6 +102,8 @@ function Signup() {
           width='100%'
           appearance="primary"
           style={{display: 'flex', justifyContent: 'center'}}
+          onClick={Signup}
+          isLoading={fetch.isLoading}
         >
           {fetch.isLoading ?
             <Spinner size={16} style={{color: '#FFFFFF'}}/>
