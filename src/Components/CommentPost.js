@@ -2,11 +2,12 @@ import React from 'react'
 import { Pane, Button, Text, Heading, Icon, Avatar } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
+import CommentsEditor from './CommentsEditor.js';
 
 const commentWrapper = {
   display: 'flex',
   flexDirection: 'row',
-  marginBottom: '25px',
+  marginBottom: '5px',
 
 }
 const commentBox = {
@@ -35,25 +36,25 @@ const commentToolbar = {
 
 function Comment(props) {
   //var url = props.article.title.split(' ').join('-')
-  const comment = props.comment
-  const timeago = timeDifferenceForDate(comment.date)
-  console.log(comment)
+  const state = props.editorState
+  const onChange = props.onChange
+  const user = props.user
   return(
     <Pane style={commentWrapper}>
-      <Avatar name={comment.author} size={40} />
+      <Avatar name={user.username} size={40} />
       <Pane elevation={1} style={commentBox}>
         <div style={commentToolbar}>
-        <Link to={`/author/${comment.by}`}>
-          <Text>
-            {comment.author}
+          <Text style={{marginRight: '4px', marginBottom: '-2px'}}>
+            Add a comment as
           </Text>
-        </Link>
-          <Text style={{marginLeft: '4px', marginBottom: '-2px'}}>
-            commented {timeago}
-          </Text>
+          <Link to={`/author/${user.username}`}>
+            <Text>
+              {user.username}
+            </Text>
+          </Link>
         </div>
         <div style={commentPane}>
-          <Text> Comment blha blah lah </Text>
+          <CommentsEditor editorState={state} onChange={onChange}/>
         </div>
       </Pane>
     </Pane>

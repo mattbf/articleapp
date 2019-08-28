@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import useGlobal from '../GlobalState/Store/Store';
 import axios from 'axios'
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
@@ -10,7 +11,7 @@ import { PrettyUrl } from '../Utils/PrettyUrl.js';
 import { convertFromHTML, convertToHTML } from "draft-convert"
 
 import ArticleViewer from './ArticleViewer.js';
-import CommentsEditor from './CommentsEditor.js';
+import CommentPost from './CommentPost.js';
 import htmlToDraft from 'html-to-draftjs';
 
 import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
@@ -27,8 +28,13 @@ import {
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+//const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+
 function Article(props) {
+  const [globalState, globalActions] = useGlobal();
+  const user = globalState.user
+  const auth = globalState.isAuth
+
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
   const url = `http://localhost:4000/articles/${slug}`
@@ -108,6 +114,41 @@ function Article(props) {
         })
   }, [])
 
+  // function PostComment() {
+  //   setFetch({
+  //     isLoading: true,
+  //     isError: false,
+  //     error: null
+  //   })
+  //   axios.post('http://localhost:4000/articles/add')
+  //   axios({
+  //     method: 'post',
+  //     url: 'http://localhost:4000/articles/add',
+  //     data:{
+  //     	title: title,
+  //     	author: user.username,
+  //     	body: JSON.stringify(rawContentState),
+  //     	slug: title ? PrettyUrl(title) : ''
+  //     }
+  //   })
+  //     .then(response => {
+  //       console.log(response)
+  //       setFetch({
+  //         isLoading: false,
+  //         isError: false,
+  //         error: null
+  //       })
+  //       setIsSuccess(true)
+  //     })
+  //     .catch(function(error) {
+  //       setFetch({
+  //         isLoading: false,
+  //         isError: true,
+  //         error: error
+  //       })
+  //       console.log(error);
+  //     })
+  // }
 
 
   return(
@@ -163,12 +204,21 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
             <Heading size={700} marginBottom={20} >Comments</Heading>
-            {article.commentsCount == 0 ?
-              <div style={{marginBottom: '20px'}}> No Comments yet</div>
-              :
-              <Comments comments={article.data.comments} />
-            }
-            <CommentsEditor readOnly={false} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
+            <div style={{backgroundColor: '#FFFFFF', padding: '25px'}}>
+              {article.commentsCount == 0 ?
+                <div style={{marginBottom: '20px'}}> No Comments yet</div>
+                :
+                <Comments comments={article.data.comments} />
+              }
+              <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
+              <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
+                <div style={{marginLeft: 'auto', marginRight: '0px'}}>
+                  <Button marginRight={45} appearance="primary" intent="success">
+                    Post Comment
+                  </Button>
+                </div>
+              </div>
+            </div>
           </Pane>
         </div>
       }

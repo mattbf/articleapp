@@ -7,7 +7,7 @@ import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 function ArticleEditor(props) {
-  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Write your masterpeice...","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Add a comment to this article...","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -29,8 +29,6 @@ function ArticleEditor(props) {
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={props.onChange}
-        readOnly={props.readOnly}
-        toolbarHidden={props.readOnly}
         contentState={content}
         height='100%'
         toolbar={{
@@ -38,8 +36,7 @@ function ArticleEditor(props) {
           'blockType',
           'list',
           'link',
-          'remove',
-          'history'],
+        ],
           inline: {
             inDropdown: true,
             options: ['bold', 'italic', 'underline', 'strikethrough',],
