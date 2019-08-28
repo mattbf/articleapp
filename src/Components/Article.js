@@ -222,20 +222,17 @@ function Article(props) {
                 :
                 <Comments comments={article.data.comments} />
               }
-              {commentFetch.isLoading ?
-                <div>Loading</div>
-                :
                 <div>
                   <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
                   <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
                     <div style={{marginLeft: 'auto', marginRight: '0px'}}>
-                      <Button disabled={!commentFetch.commentSet} isLoading={false} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
+                      <Button disabled={!commentFetch.commentSet} isLoading={commentFetch.isLoading} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
                         Post Comment
                       </Button>
                     </div>
                   </div>
                 </div>
-              }
+
 
             </div>
           </Pane>
