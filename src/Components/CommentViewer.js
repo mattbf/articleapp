@@ -19,16 +19,17 @@ function CommentViewer(props) {
   }
 
   useEffect(() => {
+    console.log('loaded')
     setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(content))))
   }, [])
 
     return (
       <div>
       <Editor
-        editorState={props.editorState}
+        editorState={editorState}
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
-        onEditorStateChange={props.onChange}
+        onEditorStateChange={onChangeEditor}
         readOnly={true}
         toolbarHidden={true}
         //contentState={props.initialState}

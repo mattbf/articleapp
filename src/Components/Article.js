@@ -87,7 +87,7 @@ function Article(props) {
     axios.get(url)
         .then(response => {
             // console.log("fetched article")
-            //console.log(response.data)
+            console.log(response.data.body)
 
             setArticle({
               data: response.data,
