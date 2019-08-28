@@ -6,7 +6,7 @@ import { htmlToDraft } from 'html-to-draftjs';
 import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
-function ArticleEditor(props) {
+function ArticleViewer(props) {
   const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   // constructor(props) {
   //   super(props);
@@ -43,7 +43,7 @@ function ArticleEditor(props) {
     )
 }
 
-export default ArticleEditor
+export default ArticleViewer
 
 
 // import React, { Component } from 'react';

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { HashLink as SectionLink } from 'react-router-hash-link';
 import Navbar from './Navbar'
@@ -70,7 +70,16 @@ function CreateArticle() {
     setEditorState(editorState)
   }
 
-  function Publish(articleContent) {
+  const rawContentState = convertToRaw(
+  editorState.getCurrentContent()
+  );
+
+   useEffect(() => {
+     console.log(rawContentState)
+   }, [editorState])
+
+
+  function Publish() {
     setFetch({
       isLoading: true,
       isError: false,
@@ -83,7 +92,7 @@ function CreateArticle() {
       data:{
       	title: title,
       	author: "Not an author",
-      	body: articleContent,
+      	body: JSON.stringify(rawContentState),
       	slug: title ? PrettyUrl(title) : ''
       }
     })
@@ -110,10 +119,12 @@ function CreateArticle() {
   //   setArticleInfo(convertToRaw(contentState))
   //   console.log(articleInfo)
   // }
-  function onEdit(content) {
-    setArticleInfo(content)
-    console.log(articleInfo)
-  }
+  // function onEdit(content) {
+  //   setArticleInfo(content)
+  //   console.log(articleInfo)
+  // }
+
+
   const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   return(
     <div>

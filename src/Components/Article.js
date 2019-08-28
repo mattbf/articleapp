@@ -13,6 +13,7 @@ import LinkSource from './LinkSource.js'
 //import ViewOnlyEditor from './ViewOnlyEditor'
 
 import ArticleEditor from './ArticleEditor.js';
+import ArticleViewer from './ArticleViewer.js';
 import htmlToDraft from 'html-to-draftjs';
 
 import { EditorState, ContentState, convertFromRaw, convertToRaw } from "draft-js";
@@ -48,7 +49,9 @@ function Article(props) {
 
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
+    //EditorState.createWithContent(convertFromRaw(rawContentState))
   );
+
   const onChangeEditor = (editorState) => {
     setEditorState(editorState)
   }
@@ -76,9 +79,11 @@ function Article(props) {
               isError: false,
               error: null
             })
-            setEditorState(response.data.body[0])
+            // setEditorState(
+            //   EditorState.createWithContent(convertFromRaw(response.data))
+            // )
 
-            console.log(response.data)
+            console.log(response.data.body[0])
         })
         .catch(function (error){
           setFetch({
@@ -144,7 +149,7 @@ function Article(props) {
           </Pane>
           <Pane padding={15} background='#F7F9FD'>
             <Pane background="#FFFFFF" padding={24} marginBottom={16}>
-              <ArticleEditor readOnly={true} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
+              <ArticleViewer readOnly={false} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
             </Pane>
           </Pane>
           <Pane padding={15} background="#F7F9FD" paddingLeft={20} >

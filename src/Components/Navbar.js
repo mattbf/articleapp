@@ -123,7 +123,7 @@ function Navbar(props) {
               </div>
             :
             <div>
-              <Button is={Link} to="/login" appearance="minimal" marginRight="10px">Login</Button>
+              <Button style={{color: '#FFFFFF'}} is={Link} to="/login" appearance="minimal" marginRight="10px">Login</Button>
               <Button is={Link} to="/signup" appearance="primary">Sign Up</Button>
             </div>
           }
