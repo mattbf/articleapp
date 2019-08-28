@@ -47,6 +47,7 @@ function Article(props) {
   const [commentFetch, setCommentFetch] = useState({
     isLoading: false,
     isError: false,
+    commentSet: false,
     error: null
   })
   const [article, setArticle] = useState({
@@ -70,6 +71,12 @@ function Article(props) {
   );
   const onChangeCommentsEditor = (commentsEditorState) => {
     setCommentsEditorState(commentsEditorState)
+    setCommentFetch({
+      isLoading: false,
+      isError: false,
+      commentSet: true,
+      error: null
+    })
   }
 
   const rawCommentContentState = convertToRaw(
@@ -123,6 +130,7 @@ function Article(props) {
     setCommentFetch({
       isLoading: true,
       isError: false,
+      commentSet: true,
       error: null
     })
     const commenturl = `http://localhost:4000/articles/${slug}/comments`
@@ -139,6 +147,7 @@ function Article(props) {
         setCommentFetch({
           isLoading: false,
           isError: false,
+          commentSet: true,
           error: null
         })
       })
@@ -146,6 +155,7 @@ function Article(props) {
         setCommentFetch({
           isLoading: false,
           isError: true,
+          commentSet: true,
           error: error
         })
         console.log(error);
@@ -212,14 +222,21 @@ function Article(props) {
                 :
                 <Comments comments={article.data.comments} />
               }
-              <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
-              <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
-                <div style={{marginLeft: 'auto', marginRight: '0px'}}>
-                  <Button marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
-                    Post Comment
-                  </Button>
+              {commentFetch.isLoading ?
+                <div>Loading</div>
+                :
+                <div>
+                  <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
+                  <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
+                    <div style={{marginLeft: 'auto', marginRight: '0px'}}>
+                      <Button disabled={!commentFetch.commentSet} isLoading={false} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
+                        Post Comment
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              }
+
             </div>
           </Pane>
         </div>

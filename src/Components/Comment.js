@@ -35,7 +35,7 @@ const commentToolbar = {
 }
 
 function Comment(props) {
-  //var url = props.article.title.split(' ').join('-')
+  
   const comment = props.comment
   const timeago = timeDifferenceForDate(comment.date)
   console.log(comment)
@@ -44,7 +44,7 @@ function Comment(props) {
       <Avatar name={comment.author} size={40} />
       <Pane elevation={1} style={commentBox}>
         <div style={commentToolbar}>
-        <Link to={`/author/${comment.by}`}>
+        <Link to={`/author/${comment.author}`}>
           <Text>
             {comment.author}
           </Text>
