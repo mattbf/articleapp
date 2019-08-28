@@ -19,52 +19,37 @@ function Home() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
+
+  const [fetch, setFetch] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
   useEffect(() => {
     if (!user.username) {
-      //console.log("user not set")
-      //window.location.reload();
-      console.log("user not set")
-      setTimeout(function(){
-        if (!user.username) {
-          //window.location.reload();
-        } else {
-          console.log("user is now set")
-        }
-      }, 3000)
+      axios.get('http://localhost:4000/user/auth', { useCredentails: true })
+        .then(response => {
+          //setUser(response.data);
+          globalActions.setUser(response.data)//check this
+          globalActions.LogInOut(true)
+          console.log(response)
+          setFetch({
+            isLoading: false,
+            isError: false,
+            error: null
+          })
+        })
+        .catch(function(error) {
+          setFetch({
+            isLoading: false,
+            isError: true,
+            error: error
+          })
+          console.log(error);
+        })
     }
   }, [])
 
-  //const [user, setUser] = useState({})
-  // const [fetch, setFetch] = useState({
-  //   isLoading: false,
-  //   isError: false,
-  //   error: null
-  // })
-  // // useEffect(() => {
-  //   if (!user.username) {
-  //     axios.get('http://localhost:4000/user/auth', { useCredentails: true })
-  //       .then(response => {
-  //         //setUser(response.data);
-  //         globalActions.setUser(response.data)//check this
-  //         globalActions.LogInOut(true)
-  //         console.log(response)
-  //         setFetch({
-  //           isLoading: false,
-  //           isError: false,
-  //           error: null
-  //         })
-  //       })
-  //       .catch(function(error) {
-  //         setFetch({
-  //           isLoading: false,
-  //           isError: true,
-  //           error: error
-  //         })
-  //         console.log(error);
-  //       })
-  //   }
-  // }, [])
-  // const auth = user.username ? true : false
   return(
     <div>
       <Navbar user={user} auth={auth}/>

@@ -44,7 +44,9 @@ function Signup(props) {
       password: login.password,
     })
         .then(response => {
-            globalActions.setUser(response.data.user)//check this
+            console.log(response)
+            if(response.data)
+            globalActions.setUser(response.data)//check this
             setFetch({
               isLoading: false,
               isError: false,
@@ -64,7 +66,7 @@ function Signup(props) {
         })
   }
   if (fetch.isAuth) {
-    browserHistory.push(`/author/${login.username}`)
+    browserHistory.push('/') //`/author/${login.username}`
     //setTimeout(()=> browserHistory.push('/'), 1000);
   }
   return(
