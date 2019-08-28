@@ -84,9 +84,7 @@ function Profile(props) {
   console.log(user.username)
   const url = `http://localhost:4000/user/${profileUser}`
 
-  //For editing bio
-  const [bio, setBio] = useState("")
-  const [edit, setEdit] = useState(false)
+
 
   const [stats, setStats] = useState([])
   const [profile, setProfile] = useState({
@@ -100,6 +98,47 @@ function Profile(props) {
     isError: false,
     error: null
   })
+  //For editing bio
+  const [bio, setBio] = useState("")
+  const [edit, setEdit] = useState(false)
+  const [changebio, setChangeBio] = useState({
+    isLoading: false,
+    isError: false,
+    error: null
+  })
+  const [refresh, setRefresh] = useState(0)
+  function ChangeBio() {
+    setChangeBio({
+      isLoading: true,
+      isError: false,
+      error: null
+    })
+    const url = `http://localhost:4000/user/${user.username}/update`
+    axios({
+      method: 'post',
+      url: url,
+      data: {
+      	bio: bio,
+    }})
+    .then(response => {
+      console.log(response)
+      setChangeBio({
+        isLoading: false,
+        isError: false,
+        error: null
+      })
+      setEdit(false)
+      setRefresh(refresh + 1)
+    })
+    .catch(function(error) {
+      setChangeBio({
+        isLoading: false,
+        isError: true,
+        error: error
+      })
+      console.log(error);
+    })
+  }
 
   useEffect(() => {
     setFetch({
@@ -146,7 +185,7 @@ function Profile(props) {
             console.log(error);
 
         })
-  }, [])
+  }, [refresh])
 
   const isCurrentUser = profileUser === user.username ? true : false
   var dateoptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -156,7 +195,7 @@ function Profile(props) {
     <div>
       <Navbar/>
       <div style={Editbutton}>
-        {isCurrentUser ? <IconButton appearance="minimal" icon="edit" /> : null}
+        {isCurrentUser ? <IconButton onClick={() => setEdit(!edit)} appearance="minimal" icon="edit" /> : null}
       </div>
       {fetch.isLoading ?
         <Pane display="flex" alignItems="center" justifyContent="center" height={400}>
@@ -182,10 +221,24 @@ function Profile(props) {
               </div>
               <div style={biotext}>
                 {edit ?
-                  <Textarea
-                    onChange={e => setBio( e.target.value )}
-                    value={bio}
-                  />
+                  <div>
+                    <Textarea
+                      onChange={e => setBio( e.target.value )}
+                      value={bio}
+                    />
+                    <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
+                      <div style={{marginLeft: 'auto', marginRight: '0px'}}>
+                        <Button isLoading={changebio.isLoading} appearance="primary" intent="success" onClick={ChangeBio}>
+                          Update Bio
+                        </Button>
+                      </div>
+                    </div>
+                    {changebio.isError ?
+                      <Text color="#EC4C47" size={300}> {changebio.error.message}</Text>
+                      :
+                      null
+                    }
+                  </div>
                   :
                   <Text size={500}>
                     {profile.user.bio}
