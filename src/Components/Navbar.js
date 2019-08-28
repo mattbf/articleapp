@@ -115,7 +115,7 @@ function Navbar(props) {
           </Pane>
         }
         </Pane>
-        <Pane marginTop="5px">
+        <Pane>
            {auth ?
              <div>
                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>

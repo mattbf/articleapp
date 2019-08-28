@@ -7,7 +7,7 @@ import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 function ArticleEditor(props) {
-  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
+  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Write your masterpeice...","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -23,7 +23,7 @@ function ArticleEditor(props) {
   // console.log(props.initialContent)
   // console.log(content)
     return (
-      <div>
+      <div style={{ height: '100%'}}>
       <Editor
         editorState={props.editorState}
         wrapperClassName="demo-wrapper"
@@ -31,14 +31,25 @@ function ArticleEditor(props) {
         onEditorStateChange={props.onChange}
         readOnly={props.readOnly}
         toolbarHidden={props.readOnly}
-        //contentState={props.initialState}
-
+        contentState={content}
+        height='100%'
+        toolbar={{
+          options: ['inline',
+          'blockType',
+          'fontSize',
+          'list',
+          'textAlign',
+          'link',
+          'remove',
+          'history'],
+          inline: {
+            options: ['bold', 'italic', 'underline', 'strikethrough',],
+          },
+          blockType: {
+            options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote',],
+          },
+        }}
       />
-      <textarea
-          disabled
-          value={JSON.stringify(props.editorState, null, 4)}
-          //value={draftToHtml(convertToRaw(props.editorState))}
-        />
       </div>
     )
 }
@@ -46,55 +57,5 @@ function ArticleEditor(props) {
 export default ArticleEditor
 
 
-// import React, { Component } from 'react';
-// import { convertFromRaw } from 'draft-js';
-// import { Editor } from 'react-draft-wysiwyg';
-//import '../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-//
-// const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
-//
-// class ArticleEditor extends Component {
-//   constructor(props) {
-//     super(props);
-//     const contentState = convertFromRaw(content);
-//     this.state = {
-//       contentState,
-//     }
-//   }
-//
-//   onContentStateChange: Function = (contentState) => {
-//     this.setState({
-//       contentState,
-//     });
-//   };
-//
-//   render() {
-//     const { contentState } = this.state;
-//     return (
-//       <div>
-//       <Editor
-//         editorState={contentState}
-//         wrapperClassName="demo-wrapper"
-//         editorClassName="demo-editor"
-//         onEditorStateChange={this.onContentStateChange}
-//         readOnly={this.props.readOnly}
-//         toolbarHidden={this.props.readOnly}
-//       />
-//       <textarea
-//           disabled
-//           value={JSON.stringify(contentState, null, 4)}
-//         />
-//       </div>
-//     );
-//   }
-// }
-//
-// export default ArticleEditor
-
-// <Editor
-//   wrapperClassName="demo-wrapper"
-//   editorClassName="demo-editor"
-//   onContentStateChange={this.onContentStateChange}
-//   readOnly={this.props.readOnly}
-//   toolbarHidden={this.props.readOnly}
-// />
+// removed buttons
+// 'emoji', 'image', 'embedded', 'colorPicker', 'fontFamily',

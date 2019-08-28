@@ -74,10 +74,6 @@ function CreateArticle() {
   editorState.getCurrentContent()
   );
 
-   useEffect(() => {
-     console.log(rawContentState)
-   }, [editorState])
-
 
   function Publish() {
     setFetch({
@@ -91,7 +87,7 @@ function CreateArticle() {
       url: 'http://localhost:4000/articles/add',
       data:{
       	title: title,
-      	author: "Not an author",
+      	author: user.username,
       	body: JSON.stringify(rawContentState),
       	slug: title ? PrettyUrl(title) : ''
       }
@@ -114,18 +110,7 @@ function CreateArticle() {
         console.log(error);
       })
   }
-  // function onEdit(content) {
-  //   const contentState = content.getCurrentContent()
-  //   setArticleInfo(convertToRaw(contentState))
-  //   console.log(articleInfo)
-  // }
-  // function onEdit(content) {
-  //   setArticleInfo(content)
-  //   console.log(articleInfo)
-  // }
 
-
-  const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
   return(
     <div>
       <CreateNav publish={Publish}/>
@@ -155,7 +140,7 @@ function CreateArticle() {
             <div>
               {!fetch.isLoading ?
                 <Pane elevation={1} style={paper} padding={24}>
-                  <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor} initialContent={content}/>
+                  <ArticleEditor readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
                 </Pane>
                 :
                 <Pane style={paper} display="flex" alignItems="center" justifyContent="center" height={400}>

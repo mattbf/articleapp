@@ -29,16 +29,11 @@ function ArticleViewer(props) {
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={props.onChange}
-        readOnly={props.readOnly}
-        toolbarHidden={props.readOnly}
+        readOnly={true}
+        toolbarHidden={true}
         //contentState={props.initialState}
 
       />
-      <textarea
-          disabled
-          value={JSON.stringify(props.editorState, null, 4)}
-          //value={draftToHtml(convertToRaw(props.editorState))}
-        />
       </div>
     )
 }

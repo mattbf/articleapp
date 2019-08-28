@@ -8,9 +8,6 @@ import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import { PrettyUrl } from '../Utils/PrettyUrl.js';
 
 import { convertFromHTML, convertToHTML } from "draft-convert"
-import { DraftailEditor, ENTITY_TYPE } from "draftail"
-import LinkSource from './LinkSource.js'
-//import ViewOnlyEditor from './ViewOnlyEditor'
 
 import ArticleEditor from './ArticleEditor.js';
 import ArticleViewer from './ArticleViewer.js';
@@ -27,7 +24,7 @@ import {
   TextInput,
   toaster
 } from 'evergreen-ui'
-//import { Pane as SectionLink } from 'evergreen-ui'
+
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const content = {"entityMap":{},"blocks":[{"key":"637gr","text":"Initialized from content state.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]};
@@ -49,7 +46,6 @@ function Article(props) {
 
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
-    //EditorState.createWithContent(convertFromRaw(rawContentState))
   );
 
   const onChangeEditor = (editorState) => {
@@ -67,7 +63,7 @@ function Article(props) {
     axios.get(url)
         .then(response => {
             // console.log("fetched article")
-            console.log(response.data)
+            //console.log(response.data)
 
             setArticle({
               data: response.data,
@@ -83,7 +79,7 @@ function Article(props) {
               EditorState.createWithContent(convertFromRaw(JSON.parse(response.data.body)))
             )
 
-            console.log(response.data.body)
+            //console.log(response.data.body)
         })
         .catch(function (error){
           setFetch({
@@ -167,8 +163,3 @@ function Article(props) {
 }
 
 export default Article
-
-//{article.data}
-// <Text>{article.data.body}</Text>
-
-// <Editor editorState={editorState} readOnly={true} />
