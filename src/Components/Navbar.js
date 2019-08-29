@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { Link, withRouter } from "react-router-dom";
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
+import MediaQuery from 'react-responsive';
+import useWindowSize from '../Utils/useWindowSize'
 import {
   Pane,
   Button,
@@ -93,11 +95,13 @@ function Navbar(props) {
   const [globalState, globalActions] = useGlobal();
   const auth = globalState.isAuth
   const user = globalState.user
-  
+  const windowSize = useWindowSize()
+  const isMobile = windowSize.width < 500 ? true : false
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
-
+  console.log(windowSize.width)
+  console.log(isMobile)
   const browserHistory = props.history
   function LogoutUser() {
     axios.get('http://localhost:4000/user/logout')
@@ -129,6 +133,7 @@ function Navbar(props) {
         }
         </Pane>
         <Pane>
+
            {auth ?
              <div>
                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>

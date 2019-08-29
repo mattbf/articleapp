@@ -44,7 +44,7 @@ const Example = () => (
       <MediaQuery minDeviceWidth={1824}>
         <div>You also have a huge screen</div>
       </MediaQuery>
-      <MediaQuery maxWidth={1224}>
+      <MediaQuery maxWidth={1000}>
         <div>You are sized like a tablet or mobile phone though</div>
       </MediaQuery>
     </MediaQuery>
@@ -105,22 +105,6 @@ function App() {
       })
   }, [])
 
-// const initialState = { isAuth: false, user: " "}
-//
-// const logIn = () => ({ type: 'LOG_IN' });
-// const logOut = () => ({ type: 'LOG_OUT' });
-//
-// const reducer = (state, action) => {
-//   switch (action.type) {
-//     case 'LOG_IN':
-//       return { isAuth: true, user: user };
-//     case 'LOG_OUT':
-//       return { isAuth : false, user: {}};
-// }
-// }
-//console.log(initialState)
-
-
 function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
@@ -155,7 +139,7 @@ const exampleuserobj = {
           <Route path="/author/:username" component={Profile}/>
           <Route path="/article/:title" component={Article}/>
           <PrivateRoute path="/new" component={CreateArticle}/>
-          <PrivateRoute path="/admin" component={Admin}/>
+          <Route path="/admin" component={Admin}/>
         </div>
         <div style={centerBlockBlank}>
           <Route path="/login" component={Login} />

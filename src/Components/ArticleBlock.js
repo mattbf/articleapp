@@ -3,6 +3,7 @@ import { Pane, Button, Text, Heading, Icon, Pill } from 'evergreen-ui'
 import {Link} from 'react-router-dom'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import { PrettyUrl } from '../Utils/PrettyUrl.js';
+import { HashLink as SectionLink } from 'react-router-hash-link';
 
 // position: 'absolute',
 // left: '5px',
@@ -17,9 +18,9 @@ const articleLink = {
 
 function ArticleBlock(props) {
   //var url = props.article.title.split(' ').join('-')
-  const url = PrettyUrl(props.article.title)
+  const slug = PrettyUrl(props.article.title)
   var timeago = timeDifferenceForDate(props.article.createdAt)
-  
+
   var authorLink = `/author/${props.article.author}`
   const commentsCount = props.article.comments.length
   return(
@@ -31,7 +32,7 @@ function ArticleBlock(props) {
             <div>
               <Link
                 to={{
-                  pathname: `/article/${url}`,
+                  pathname: `/article/${slug}`,
                   state: {props},
                 }}
                 style={articleLink}
