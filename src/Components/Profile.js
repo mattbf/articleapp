@@ -202,7 +202,7 @@ function Profile(props) {
         </Pane>
         :
         fetch.isError ?
-          <div>error</div>
+          <div>Error: {fetch.error.message}</div>
           :
           <div style={TopProfile}>
             <div style={ProfileBox}>

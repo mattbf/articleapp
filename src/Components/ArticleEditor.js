@@ -31,7 +31,7 @@ function ArticleEditor(props) {
         onEditorStateChange={props.onChange}
         readOnly={props.readOnly}
         toolbarHidden={props.readOnly}
-        contentState={content}
+        //contentState={content}
         height='100%'
         toolbar={{
           options: ['inline',
