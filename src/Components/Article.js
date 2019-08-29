@@ -202,10 +202,8 @@ function Article(props) {
               </Link>
               <Heading size={200} marginRight={5}>{article.timeago} |</Heading>
               <SectionLink
-                to={{
-                  pathname: `/article/${article.data.title}#comments`,
-                  state: {props},
-                }}
+                smooth
+                to={`/article/${slug}#comments`}
               >
                 <Text size={300} marginRight={3}>{article.commentsCount} comments</Text>
               </SectionLink>
@@ -217,35 +215,37 @@ function Article(props) {
               <ArticleViewer readOnly={false} editorState={editorState} onChange={onChangeEditor}/>
             </Pane>
           </Pane>
-          <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
-            <Heading size={700} marginBottom={20} >Comments</Heading>
-            <div style={{backgroundColor: '#FFFFFF', padding: '25px'}}>
-              {article.commentsCount == 0 ?
-                <div style={{marginBottom: '20px'}}> No Comments yet</div>
-                :
-                <Comments comments={article.data.comments} />
-              }
-                {commentFetch.isError ?
-                  <div>
-                    <Text color="#EC4C47" size={300}> {commentFetch.error.message}</Text>
-                  </div>
+          <div id="comments">
+            <Pane padding={15} background="#F7F9FD" paddingLeft={20} >
+              <Heading size={700} marginBottom={20} >Comments</Heading>
+              <div style={{backgroundColor: '#FFFFFF', padding: '25px'}}>
+                {article.commentsCount == 0 ?
+                  <div style={{marginBottom: '20px'}}> No Comments yet</div>
                   :
-                  null
+                  <Comments comments={article.data.comments} />
                 }
-                <div>
-                  <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
-                  <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
-                    <div style={{marginLeft: 'auto', marginRight: '0px'}}>
-                      <Button disabled={!commentFetch.commentSet} isLoading={commentFetch.isLoading} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
-                        Post Comment
-                      </Button>
+                  {commentFetch.isError ?
+                    <div>
+                      <Text color="#EC4C47" size={300}> {commentFetch.error.message}</Text>
+                    </div>
+                    :
+                    null
+                  }
+                  <div>
+                    <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
+                    <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
+                      <div style={{marginLeft: 'auto', marginRight: '0px'}}>
+                        <Button disabled={!commentFetch.commentSet} isLoading={commentFetch.isLoading} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
+                          Post Comment
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
 
 
-            </div>
-          </Pane>
+              </div>
+            </Pane>
+          </div>
         </div>
       }
     </div>
