@@ -10,6 +10,7 @@ import { Route, Redirect } from 'react-router'
 import {PrettyUrl} from '../Utils/PrettyUrl'
 import axios from 'axios'
 import useGlobal from '../GlobalState/Store/Store';
+import useWindowSize from '../Utils/useWindowSize'
 
 import { EditorState, convertToRaw } from 'draft-js';
 
@@ -33,7 +34,7 @@ const ArticleWrapper = {
 }
 const paper = {
   backgroundColor: '#FFFFFF',
-  width: '80%',
+  width: '90%',
   minHeight: '80vh',
   marginLeft: 'auto',
   marginRight: 'auto',
@@ -54,6 +55,9 @@ function CreateArticle() {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
+
+  const windowSize = useWindowSize()
+  const isMobile = windowSize.width < 500 ? true : false
 
   const [title, setTitle] = useState('')
   const [articleInfo, setArticleInfo] = useState({})
@@ -115,7 +119,15 @@ function CreateArticle() {
   return(
     <div>
       <CreateNav publish={Publish}/>
-      <div style={TitleBox}>
+      <div style={ {
+        marginRight: 'auto',
+        marginLeft: 'auto',
+        marginTop: '25px',
+        width: isMobile ? '95%' : '60%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}>
         <Heading marginBottom="10px" size={700}> Article Title </Heading>
         <TextInput
           onChange={e => setTitle(e.target.value)}

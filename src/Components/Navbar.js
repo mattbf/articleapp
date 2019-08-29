@@ -79,7 +79,7 @@ function UserMenu(props) {
     >
       <Button marginRight={props.isMobile ? 5 : 16} appearance="minimal" style={{border: 'none'}}>
         <Pane display="flex" alignItems="center">
-          <Avatar name={user.username} size={30} marginRight={0} hashValue="id_124" />
+          <Avatar name={user.username} size={30} marginRight={5} hashValue="id_124" />
           {props.isMobile ?
             null
             :
