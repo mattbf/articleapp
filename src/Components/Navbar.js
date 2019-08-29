@@ -16,6 +16,7 @@ import {
   toaster,
   Position,
   Box,
+  IconButton
 } from 'evergreen-ui'
 
 const logoBlock = {
@@ -76,10 +77,14 @@ function UserMenu(props) {
         </Menu>
       }
     >
-      <Button marginRight={16} appearance="minimal" style={{border: 'none'}}>
+      <Button marginRight={props.isMobile ? 5 : 16} appearance="minimal" style={{border: 'none'}}>
         <Pane display="flex" alignItems="center">
-          <Avatar name={user.username} size={30} marginRight={5} hashValue="id_124" />
-          <Text size={400} style={lightText}> {user.username} </Text>
+          <Avatar name={user.username} size={30} marginRight={0} hashValue="id_124" />
+          {props.isMobile ?
+            null
+            :
+            <Text size={400} style={lightText}> {user.username} </Text>
+          }
         </Pane>
       </Button>
     </Popover>
@@ -95,8 +100,10 @@ function Navbar(props) {
   const [globalState, globalActions] = useGlobal();
   const auth = globalState.isAuth
   const user = globalState.user
+
   const windowSize = useWindowSize()
   const isMobile = windowSize.width < 500 ? true : false
+
   const { match, location, history } = props
   const path = match.path
   const isArticle = path == '/article/:title' ? true : false
@@ -135,9 +142,9 @@ function Navbar(props) {
         <Pane>
 
            {auth ?
-             <div>
-               <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
-               <UserMenu user={user} logout={LogoutUser}/>
+             <div style={{display: 'flex'}}>
+                <Button is={Link} iconBefore="plus" to="/new" appearance="primary">New Article</Button>
+               <UserMenu user={user} logout={LogoutUser} isMobile={isMobile}/>
               </div>
             :
             <div>
