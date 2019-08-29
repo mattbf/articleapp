@@ -7,7 +7,7 @@ import Navbar from './Navbar'
 import Comments from './Comments'
 import { timeDifferenceForDate } from '../Utils/TimeDif.js';
 import { PrettyUrl } from '../Utils/PrettyUrl.js';
-
+import useWindowSize from '../Utils/useWindowSize'
 import { convertFromHTML, convertToHTML } from "draft-convert"
 
 import ArticleViewer from './ArticleViewer.js';
@@ -34,6 +34,9 @@ function Article(props) {
   const [globalState, globalActions] = useGlobal();
   const user = globalState.user
   const auth = globalState.isAuth
+
+  const windowSize = useWindowSize()
+  const isMobile = windowSize.width < 500 ? true : false
 
   const articleTitle = props.match.params.title
   const slug = PrettyUrl(articleTitle)
@@ -235,7 +238,7 @@ function Article(props) {
                     <CommentPost user={user} editorState={commentsEditorState} onChange={onChangeCommentsEditor}/>
                     <div style={{width: '100%', display: 'flex', alignItems: 'flex-end'}}>
                       <div style={{marginLeft: 'auto', marginRight: '0px'}}>
-                        <Button disabled={!commentFetch.commentSet} isLoading={commentFetch.isLoading} marginRight={45} appearance="primary" intent="success" onClick={PostComment}>
+                        <Button disabled={!commentFetch.commentSet} isLoading={commentFetch.isLoading} marginRight={isMobile ? 0 : 45} appearance="primary" intent="success" onClick={PostComment}>
                           Post Comment
                         </Button>
                       </div>
